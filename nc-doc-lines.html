@@ -83,6 +83,7 @@ Copyright (c) 2017 Neo
                       line="{{line}}"
                       line-actions-enabled="[[lineActionsEnabled]]"
                       show-line-delivery-order="[[showLineDeliveryOrder]]"
+                      line-amount-type="[[lineAmountType]]"
                       on-actions="_showActions">
               </nc-doc-lines-line>
           </template>
@@ -121,6 +122,7 @@ Copyright (c) 2017 Neo
           lineActionsEnabled: Boolean,
           showCanceledLines: Boolean,
           showLineDeliveryOrder: Boolean,
+          lineAmountType: String,
           previewMode: Boolean,
           lines: {
             type: Array,
@@ -138,15 +140,6 @@ Copyright (c) 2017 Neo
         }
       }
 
-      // ready() {
-      //   super.ready()
-      //   this.addEventListener('dom-change', function() {
-      //     // auto-binding template is ready.
-      //     console.log('test')
-      //     this._scrollLinesToBottom();
-      //   });
-      // }
-
       _dataChanged() {
         this.set('lines', []);
         if (!this.data) return;
@@ -155,7 +148,6 @@ Copyright (c) 2017 Neo
           
         }
         Polymer.dom.flush();
-        //this._scrollLinesToBottom();
       }
 
       _showLine(line){
