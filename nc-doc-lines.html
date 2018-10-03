@@ -173,13 +173,15 @@ Copyright (c) 2017 Neo
       }
 
       _addQty(){
+        // this._currentLine.format.qty++;
         this.dispatchEvent(new CustomEvent('line-inc', { detail: this._currentLine, bubbles: true, composed: true }));
-        this._currentLine.format.qty++;
+        
       }
 
       _removeQty(){
+        // this._currentLine.format.qty--;
         this.dispatchEvent(new CustomEvent('line-dec', { detail: this._currentLine, bubbles: true, composed: true }));
-        this._currentLine.format.qty--;
+        
 
         if (this._currentLine.format.qty <= 0) {
           this.shadowRoot.querySelector('#actions').close();
