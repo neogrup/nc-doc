@@ -35,7 +35,8 @@ Copyright (c) 2017 Neo
             data="[[data.data.lines]]"
             preview-mode="[[previewMode]]"
             show-canceled-lines="[[showCanceledLines]]"
-            line-actions-enabled="[[lineActionsEnabled]]">
+            line-actions-enabled="[[lineActionsEnabled]]"
+            show-line-delivery-order="[[showLineDeliveryOrder]]">
         </nc-doc-lines>
       </div>
     </template>
@@ -73,6 +74,10 @@ Copyright (c) 2017 Neo
             value: false
           },
           lineActionsEnabled: {
+            type: Boolean,
+            value: false
+          },
+          showLineDeliveryOrder: {
             type: Boolean,
             value: false
           },

@@ -82,6 +82,7 @@ Copyright (c) 2017 Neo
               <nc-doc-lines-line
                       line="{{line}}"
                       line-actions-enabled="[[lineActionsEnabled]]"
+                      show-line-delivery-order="[[showLineDeliveryOrder]]"
                       on-actions="_showActions">
               </nc-doc-lines-line>
           </template>
@@ -119,6 +120,7 @@ Copyright (c) 2017 Neo
           },
           lineActionsEnabled: Boolean,
           showCanceledLines: Boolean,
+          showLineDeliveryOrder: Boolean,
           previewMode: Boolean,
           lines: {
             type: Array,

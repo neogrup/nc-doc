@@ -36,6 +36,13 @@ Copyright (c) 2017 Neo
         border-width: 0 0 1px 0;
       }
 
+      .line-content-delivery-order-name{
+        font-size: 0.8em;
+        width: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        /* text-overflow: ellipsis; */
+      }
 
       .line-qty {
         width: 40px;
@@ -85,8 +92,11 @@ Copyright (c) 2017 Neo
     </style>
 
     <div class="line">
+      <template is="dom-if" if="{{showLineDeliveryOrder}}">
+        <div class="line-content-delivery-order-name">[[line.kitchen.deliveryName]]</div>
+      </template>
       <div class="line-qty">[[line.format.qty]]</div>
-      <div _class="line-content" class$="{{_getLineClass(line.type)}}">
+      <div class$="{{_getLineClass(line.type)}}">
         <div class="line-content-name">[[line.product.name]]</div>
         <div class="line-content-format">[[line.format.name]]</div>
         <div class="line-content-comments">[[line.comments.private]]</div>
@@ -114,6 +124,10 @@ Copyright (c) 2017 Neo
             value: {}
           },
           lineActionsEnabled: {
+            type: Boolean,
+            value: false
+          },
+          showLineDeliveryOrder: {
             type: Boolean,
             value: false
           }
