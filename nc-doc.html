@@ -1,0 +1,100 @@
+<!--
+@license
+Copyright (c) 2017 Neo
+-->
+
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+
+<link rel="import" href="nc-doc-header.html">
+<link rel="import" href="nc-doc-lines.html">
+<link rel="import" href="nc-doc-footer.html">
+
+
+<dom-module id="nc-doc">
+  <template>
+    <style>
+      :host{
+        @apply --layout-vertical;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    
+    <template is="dom-if" if="{{showDocHeader}}">
+      <div id="doc-header">
+        <nc-doc-header
+          data="[[data.data]]">
+        </nc-doc-header>
+      </div>
+    </template>
+
+    <template is="dom-if" if="{{showDocLines}}">
+      <div id="doc-lines" style="height: 100%;overflow: auto;">
+        <nc-doc-lines
+            data="[[data.data.lines]]"
+            preview-mode="[[previewMode]]"
+            show-canceled-lines="[[showCanceledLines]]"
+            line-actions-enabled="[[lineActionsEnabled]]">
+        </nc-doc-lines>
+      </div>
+    </template>
+    
+    <template is="dom-if" if="{{showDocFooter}}">
+      <div id="doc-footer">
+        <nc-doc-footer
+          data="[[data.data]]"
+          show-change-in-dialog="[[showChangeInDialog]]">
+        </nc-doc-footer>
+      </div>
+    </template>
+
+  </template>
+
+  <script>
+    class NcDoc extends Polymer.Element {
+      static get is() {
+        return 'nc-doc';
+      }
+      static get properties() {
+        return {
+          language: String,
+          data: Object,
+          showDocHeader: {
+            type: Boolean,
+            value: false
+          },
+          showDocLines: {
+            type: Boolean,
+            value: false
+          },
+          showDocFooter: {
+            type: Boolean,
+            value: false
+          },
+          lineActionsEnabled: {
+            type: Boolean,
+            value: false
+          },
+          showCanceledLines: {
+            type: Boolean,
+            value: false
+          },
+          showChangeInDialog: {
+            type: Boolean,
+            value: false
+          },
+          previewMode: {
+            type: Boolean,
+            value: false
+          }
+        }
+      }
+
+      scrollLinesToBottom(){
+        this.shadowRoot.querySelector('nc-doc-lines')._scrollLinesToBottom();
+      }
+    }
+    window.customElements.define(NcDoc.is, NcDoc);
+  </script>
+</dom-module>

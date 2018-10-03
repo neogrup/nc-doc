@@ -1,0 +1,110 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2017 Neo
+-->
+<html lang="es">
+<head>
+  <title>nc-doc demo</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../polymer/polymer-element.html">
+  <link rel="import" href="../../iron-ajax/iron-ajax.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+
+  <link rel="import" href="../nc-doc.html">
+</head>
+<body unresolved>
+<dom-module id="nc-doc-demo">
+  
+  <template>
+    <style>
+      .container{
+        @apply --layout-horizontal;
+        @apply --layout-around-justified;
+        position: absolute;
+        height: calc(100% - 10px); /* padding of container */
+        width: calc(100% - 10px); /* padding of container */
+      }
+
+      div{
+        background-color: #eeeeee;
+        height: 50%;
+      }
+    </style>
+    <iron-ajax
+        auto
+        id="getDoc"
+        url="data/doc.json"
+        method="get"
+        handle-as="json"
+        last-response="{{dataDoc}}">
+    </iron-ajax>
+      
+    <div class="container">
+      <div>
+        <nc-doc
+            data="[[dataDoc]]"
+            show-doc-header
+            show-doc-lines
+            show-doc-footer
+            preview-mode
+            show-canceled-lines="[[showCanceledLines]]"
+            line-actions-enabled="[[lineActionsEnabled]]"
+            on-line-inc="_lineInc"
+            on-line-dec="_lineDec"
+            on-line-del="_lineDel">
+        </nc-doc>
+      </div>
+
+      <div>
+          <nc-doc
+              data="[[dataDoc]]"
+              show-doc-header
+              show-doc-lines
+              show-doc-footer
+              preview-mode
+              show-canceled-lines="[[showCanceledLines]]"
+              line-actions-enabled
+              on-line-inc="_lineInc"
+              on-line-dec="_lineDec"
+              on-line-del="_lineDel">
+          </nc-doc>
+        </div>
+    </div>
+
+  
+  </template>
+  <script>
+    class NcDocDemo extends Polymer.Element {
+      static get is() {
+        return 'nc-doc-demo';
+      }
+
+      _lineInc(currentLine){
+        console.log('line inc!')
+        console.log(currentLine.detail);
+      }
+
+      _lineDec(currentLine){
+        console.log('line dec!')
+        console.log(currentLine.detail);
+      }
+
+      _lineDel(currentLine){
+        console.log('line del!')
+        console.log(currentLine.detail);
+      }
+    }
+    window.customElements.define(NcDocDemo.is, NcDocDemo);
+
+  </script>
+</dom-module>
+<nc-doc-demo></nc-doc-demo>
+</body>
+</html>

@@ -1,0 +1,149 @@
+{
+    "apiVersion": "1",
+    "systemTime": "2018-03-21T10:29:23.3022111+01:00",
+    "data": {
+        "attendedByName": "EPL",
+        "customer": {
+            "name": "Contado"
+        },
+        "date": "20180321",
+        "discounts": [
+            {
+                "baseAmount": 9.24,
+                "code": "DTVP",
+                "discountAmount": 1.85,
+                "id": "10",
+                "name": "Dto. de pie 20,00%",
+                "rate": 20
+            }
+        ],
+        "fiscal": {
+            "totals": {
+                "grossAmount": 9.24,
+                "netAmount": 7.39
+            }
+        },
+        "lines": [
+            {
+                "format": {
+                    "qty": 2
+                },
+                "grossAmount": 3.98,
+                "id": 1,
+                "netAmount": 3.98,
+                "product": {
+                    "id": "R00001",
+                    "name": "Coca Cola lata",
+                    "price": 1.99
+                }
+            },
+            {
+                "format": {
+                    "qty": 1
+                },
+                "grossAmount": 1.5,
+                "id": 2,
+                "netAmount": 1.5,
+                "packNetAmount": 1.8,
+                "product": {
+                    "id": "R00207",
+                    "name": "Carajillo",
+                    "price": 1.5
+                },
+                "type": "pack"
+            },
+            {
+                "affectPrice": "N",
+                "format": {
+                    "qty": 1
+                },
+                "grossAmount": 0.95,
+                "id": 3,
+                "netAmount": 0.95,
+                "product": {
+                    "id": "R00055",
+                    "name": "Café solo",
+                    "price": 0.95
+                },
+                "type": "packLine"
+            },
+            {
+                "format": {
+                    "qty": 1
+                },
+                "grossAmount": 0.3,
+                "id": 4,
+                "netAmount": 0.3,
+                "printMode": "hidePrice",
+                "product": {
+                    "id": "R00139",
+                    "name": "Chupito whisky J&B",
+                    "price": 0.3
+                },
+                "type": "packLine"
+            },
+            {
+                "format": {
+                    "qty": 1
+                },
+                "grossAmount": 0.95,
+                "id": 5,
+                "netAmount": 0.95,
+                "product": {
+                    "id": "R00006",
+                    "name": "Fanta Limón lata",
+                    "price": 0.95
+                }
+            },
+            {
+                "comments": "Con hielo",
+                "discounts": [
+                    {
+                        "baseAmount": 1.9,
+                        "code": "DL10",
+                        "discountAmount": 0.19,
+                        "id": "7",
+                        "name": "10% dto.línea",
+                        "rate": 10
+                    }
+                ],
+                "format": {
+                    "qty": 2
+                },
+                "grossAmount": 1.9,
+                "id": 6,
+                "netAmount": 1.71,
+                "product": {
+                    "id": "R00005",
+                    "name": "Fanta Naranja lata",
+                    "price": 0.95
+                }
+            },
+            {
+                "format": {
+                    "qty": 1
+                },
+                "grossAmount": 0.8,
+                "id": 8,
+                "netAmount": 0.8,
+                "product": {
+                    "id": "R00066",
+                    "name": "Agua 20cl",
+                    "price": 0.8
+                }
+            }
+        ],
+        "order": "100004",
+        "shop": "R002",
+        "status": "opened",
+        "sysData": {
+            "created": "2018-03-21T10:26:26.000",
+            "createdBy": "47275733S",
+            "edited": "2018-03-21T10:29:23.298",
+            "editedBy": "47275733S"
+        },
+        "type": "ticket",
+        "version": "0.15"
+    },
+    "error": null
+}

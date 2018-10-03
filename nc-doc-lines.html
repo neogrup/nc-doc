@@ -1,0 +1,219 @@
+<!--
+@license
+Copyright (c) 2017 Neo
+-->
+
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../iron-list/iron-list.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<link rel="import" href="nc-doc-lines-line.html">
+
+<dom-module id="nc-doc-lines">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      paper-card{
+        padding: 5px;
+        height: 100%;
+      }
+
+      iron-list {
+        height: 100%;
+        width: 100%;
+      }
+
+      paper-dialog{
+        margin:  -5px 20px;
+        padding: 0;
+      }
+
+      paper-dialog > div > paper-button > iron-icon{
+        width: 28px;
+        height: 28px;
+      }
+
+      paper-button {
+        /*background-color: red;*/
+        width: 30px;
+      }
+
+      .line-dialog-actions {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .lines-empty{
+        text-align: center;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+      }
+      
+      .lines{
+        height: 100%;
+        width:100%;
+        color: black;
+        overflow: auto;
+      }
+      
+    </style>
+
+    <paper-card>
+      <div id="lines" class="lines">
+        <template is="dom-repeat" items="{{lines}}" rendered-item-count="{{renderedCount}}" as="line">
+          <template is="dom-if" if="{{_showLine(line)}}">
+              <nc-doc-lines-line
+                      line="{{line}}"
+                      line-actions-enabled="[[lineActionsEnabled]]"
+                      on-actions="_showActions">
+              </nc-doc-lines-line>
+          </template>
+                  
+        </template>
+        <template is="dom-if" if="{{!renderedCount}}">
+          <p class="lines-empty">No se ha añadido ningún producto</p>
+        </template>
+      </div>
+    </paper-card>
+
+    <paper-dialog id="actions" no-overlap vertical-align="top">
+      <div class="line-dialog-actions">
+        <paper-button on-tap="_addQty" style="color: #598900"><iron-icon icon="add-circle"></iron-icon></paper-button>
+        <paper-button on-tap="_removeQty" style="color: #F44336"><iron-icon icon="remove-circle"></iron-icon></paper-button>
+        <paper-button on-tap="_selectQty"><iron-icon icon="create"></iron-icon></paper-button>
+        <paper-button on-tap="_delete" style="color: #F44336"><iron-icon icon="delete"></iron-icon></paper-button>
+      </div>
+    </paper-dialog>
+
+  </template>
+
+  <script>
+    class NcDocLines extends Polymer.Element {
+      static get is() {
+        return 'nc-doc-lines';
+      }
+      static get properties() {
+        return {
+          language: String,
+          data: {
+            type: Object,
+            value: {},
+            observer: '_dataChanged'
+          },
+          lineActionsEnabled: Boolean,
+          showCanceledLines: Boolean,
+          previewMode: Boolean,
+          lines: {
+            type: Array,
+            value: []
+          },
+          line: {
+            type: Object,
+            notify: true,
+            value: {}
+          },
+          _currentLine: {
+            type: Object,
+            value: {}
+          }
+        }
+      }
+
+      // ready() {
+      //   super.ready()
+      //   this.addEventListener('dom-change', function() {
+      //     // auto-binding template is ready.
+      //     console.log('test')
+      //     this._scrollLinesToBottom();
+      //   });
+      // }
+
+      _dataChanged() {
+        this.set('lines', []);
+        if (!this.data) return;
+        if (this.data.length > 0) {
+          this.set('lines', this.data);
+          
+        }
+        Polymer.dom.flush();
+        //this._scrollLinesToBottom();
+      }
+
+      _showLine(line){
+        let showLine = true;
+
+        if (this.previewMode) {
+          if (line.printMode === "doNotPrint") {
+            showLine = false;
+          }
+        }
+
+        if (!this.showCanceledLines){
+          if ((line.status === "canceled") || (line.status === "discard")) showLine = false;
+        }
+
+        return showLine;
+      }
+
+      _showActions(element){
+        this._currentLine = element.target.line;
+        this.shadowRoot.querySelector('#actions').positionTarget = element.detail;
+        this.shadowRoot.querySelector('#actions').open();
+      }
+
+      _addQty(){
+        this.dispatchEvent(new CustomEvent('line-inc', { detail: this._currentLine, bubbles: true, composed: true }));
+        this._currentLine.format.qty++;
+      }
+
+      _removeQty(){
+        this.dispatchEvent(new CustomEvent('line-dec', { detail: this._currentLine, bubbles: true, composed: true }));
+        this._currentLine.format.qty--;
+
+        if (this._currentLine.format.qty <= 0) {
+          this.shadowRoot.querySelector('#actions').close();
+        }
+      }
+
+      _selectQty(){
+        this.dispatchEvent(new CustomEvent('openSelectQty', { detail: this._currentLine, bubbles: true, composed: true }));
+      }
+
+      _delete(){
+        this.dispatchEvent(new CustomEvent('line-del', { detail: this._currentLine, bubbles: true, composed: true }));
+        this.shadowRoot.querySelector('#actions').close();
+      }
+
+      setQty(qty){
+        this.shadowRoot.querySelector('#actions').close();
+        this._currentLine.format.qty = qty;
+        this.dispatchEvent(new CustomEvent('line-set', { detail: this._currentLine, bubbles: true, composed: true }));
+      }
+
+      updateQty(line){
+      }
+
+      _scrollLinesToBottom(){
+        this.shadowRoot.querySelector('#lines').scrollTop = this.shadowRoot.querySelector('#lines').scrollHeight;
+      }
+    }
+    window.customElements.define(NcDocLines.is, NcDocLines);
+  </script>
+</dom-module>
