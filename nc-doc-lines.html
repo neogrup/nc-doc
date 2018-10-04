@@ -173,15 +173,11 @@ Copyright (c) 2017 Neo
       }
 
       _addQty(){
-        // this._currentLine.format.qty++;
         this.dispatchEvent(new CustomEvent('line-inc', { detail: this._currentLine, bubbles: true, composed: true }));
-        
       }
 
       _removeQty(){
-        // this._currentLine.format.qty--;
         this.dispatchEvent(new CustomEvent('line-dec', { detail: this._currentLine, bubbles: true, composed: true }));
-        
 
         if (this._currentLine.format.qty <= 0) {
           this.shadowRoot.querySelector('#actions').close();
@@ -189,21 +185,13 @@ Copyright (c) 2017 Neo
       }
 
       _selectQty(){
-        this.dispatchEvent(new CustomEvent('openSelectQty', { detail: this._currentLine, bubbles: true, composed: true }));
+        this.shadowRoot.querySelector('#actions').close();
+        this.dispatchEvent(new CustomEvent('line-select-qty', { detail: this._currentLine, bubbles: true, composed: true }));
       }
 
       _delete(){
         this.dispatchEvent(new CustomEvent('line-del', { detail: this._currentLine, bubbles: true, composed: true }));
         this.shadowRoot.querySelector('#actions').close();
-      }
-
-      setQty(qty){
-        this.shadowRoot.querySelector('#actions').close();
-        this._currentLine.format.qty = qty;
-        this.dispatchEvent(new CustomEvent('line-set', { detail: this._currentLine, bubbles: true, composed: true }));
-      }
-
-      updateQty(line){
       }
 
       _scrollLinesToBottom(){
