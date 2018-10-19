@@ -12,6 +12,7 @@ Copyright (c) 2017 Neo
 <link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 
 <link rel="import" href="nc-doc-lines-line.html">
 
@@ -40,19 +41,11 @@ Copyright (c) 2017 Neo
         padding: 0;
       }
 
-      paper-dialog > div > paper-button > iron-icon{
-        width: 28px;
-        height: 28px;
-      }
-
-      paper-button {
-        /*background-color: red;*/
-        width: 30px;
-      }
 
       .line-dialog-actions {
-        @apply --layout-horizontal;
-        @apply --layout-center;
+        /* @apply --layout-horizontal; */
+        /* @apply --layout-center; */
+        @apply --layout-vertical;
       }
 
       .lines-empty{
@@ -97,10 +90,13 @@ Copyright (c) 2017 Neo
 
     <paper-dialog id="actions" no-overlap vertical-align="top">
       <div class="line-dialog-actions">
-        <paper-button on-tap="_addQty" style="color: #598900"><iron-icon icon="add-circle"></iron-icon></paper-button>
-        <paper-button on-tap="_removeQty" style="color: #F44336"><iron-icon icon="remove-circle"></iron-icon></paper-button>
-        <paper-button on-tap="_selectQty"><iron-icon icon="create"></iron-icon></paper-button>
-        <paper-button on-tap="_delete" style="color: #F44336"><iron-icon icon="delete"></iron-icon></paper-button>
+        <paper-icon-button icon="add-circle" style="color: #598900" on-tap="_addQty"></paper-icon-button>
+        <paper-icon-button icon="remove-circle" style="color: #F44336" on-tap="_removeQty"></paper-icon-button>
+        <paper-icon-button icon="create"  on-tap="_selectQty"></paper-icon-button>
+        <paper-icon-button icon="font-download" on-tap="_selectName"></paper-icon-button>
+        <paper-icon-button icon="euro-symbol" on-tap="_selectPrice"></paper-icon-button>
+        <paper-icon-button icon="speaker-notes" on-tap="_selectComments"></paper-icon-button>
+        <paper-icon-button icon="delete" style="color: #F44336"  on-tap="_delete"></paper-icon-button>
       </div>
     </paper-dialog>
 
@@ -187,6 +183,21 @@ Copyright (c) 2017 Neo
       _selectQty(){
         this.shadowRoot.querySelector('#actions').close();
         this.dispatchEvent(new CustomEvent('line-select-qty', { detail: this._currentLine, bubbles: true, composed: true }));
+      }
+
+      _selectName(){
+        this.shadowRoot.querySelector('#actions').close();
+        this.dispatchEvent(new CustomEvent('line-select-name', { detail: this._currentLine, bubbles: true, composed: true }));
+      }
+
+      _selectPrice(){
+        this.shadowRoot.querySelector('#actions').close();
+        this.dispatchEvent(new CustomEvent('line-select-price', { detail: this._currentLine, bubbles: true, composed: true }));
+      }
+
+      _selectComments(){
+        this.shadowRoot.querySelector('#actions').close();
+        this.dispatchEvent(new CustomEvent('line-select-comments', { detail: this._currentLine, bubbles: true, composed: true }));
       }
 
       _delete(){
