@@ -44,12 +44,28 @@ Copyright (c) 2017 Neo
       .order-employee{
         font-size: 1.2em;
       }
+
+      .order-tariff{
+        @apply --layout-flex;
+        font-size: 1.2em;
+      }
+
+      .order-customer{
+        font-size: 1.2em;
+      }
     </style>
 
     <paper-card>
       <div class="header">
-        <div class="order-id">#[[data.order]]</div>
-        <div class="order-employee">Empleado: [[data.attendedByName]]</div>
+        <template is="dom-if" if="{{previewMode}}">
+          <div class="order-id">#[[data.order]]</div>
+          <div class="order-employee">Empleado: [[data.attendedByName]]</div>
+        </template>
+        <template is="dom-if" if="{{!previewMode}}">
+          <div class="order-tariff">[[data.tariff.code]]</div>
+          <div class="order-customer">[[data.buyerParty.name]]</div>
+        </template>
+
       </div>
     </paper-card>
   </template>
@@ -65,7 +81,8 @@ Copyright (c) 2017 Neo
           data: {
             type: Object,
             value: {}
-          }
+          },
+          previewMode: Boolean,
         }
       }
     }
