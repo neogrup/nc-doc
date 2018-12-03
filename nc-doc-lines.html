@@ -77,7 +77,8 @@ Copyright (c) 2017 Neo
                       line-actions-enabled="[[lineActionsEnabled]]"
                       show-line-delivery-order="[[showLineDeliveryOrder]]"
                       line-amount-type="[[lineAmountType]]"
-                      on-actions="_showActions">
+                      on-actions="_showLineActions"
+                      on-selected="_selectLine">
               </nc-doc-lines-line>
           </template>
                   
@@ -162,7 +163,12 @@ Copyright (c) 2017 Neo
         return showLine;
       }
 
-      _showActions(element){
+      _selectLine(element){
+        this._currentLine = element.target.line;
+        this.dispatchEvent(new CustomEvent('line-selected', { detail: this._currentLine, bubbles: true, composed: true }));
+      }
+
+      _showLineActions(element){
         this._currentLine = element.target.line;
         this.shadowRoot.querySelector('#actions').positionTarget = element.detail;
         this.shadowRoot.querySelector('#actions').open();

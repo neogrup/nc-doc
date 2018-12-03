@@ -36,8 +36,14 @@ Copyright (c) 2017 Neo
         border-width: 0 0 1px 0;
       }
 
-      .line-content-delivery-order-name{
-        font-size: 0.8em;
+      .line-container {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --layout-flex;
+      }
+
+      .line-delivery-order-name{
+        font-size: 0.9em;
         width: 40px;
         white-space: nowrap;
         overflow: hidden;
@@ -54,13 +60,17 @@ Copyright (c) 2017 Neo
         padding-left: 10px;
       }
 
+      .line-type-pack-incompleted{
+        background-color: var(--error-color);
+      }
+
       .line-type-pack-line{
         padding-left: 20px;
         color: #9E9E9E;
       }
 
       .line-content-name {
-        font-size: 1em;
+        font-size: 1.1em;
       }
 
       .line-content-format{
@@ -91,23 +101,30 @@ Copyright (c) 2017 Neo
 
     </style>
 
-    <div class="line">
-      <template is="dom-if" if="{{showLineDeliveryOrder}}">
-        <div class="line-content-delivery-order-name">[[line.kitchen.deliveryName]]</div>
-      </template>
-      <div class="line-qty">[[line.format.qty]]</div>
-      <div class$="{{_getLineClass(line.type)}}">
-        <div class="line-content-name">[[line.product.name]]</div>
-        <div class="line-content-format">[[line.format.name]]</div>
-        <div class="line-content-comments">[[line.comments.private]]</div>
-        <template is="dom-repeat" items="{{line.discounts}}">
-          <div class="line-content-discount">[[item.name]]</div>
+    <div id="line" class$="{{_getLineClass(line)}}" >
+
+      <div class="line-container" on-tap="_selectLine">
+
+        <template is="dom-if" if="{{showLineDeliveryOrder}}">
+          <div class="line-delivery-order-name">[[line.kitchen.deliveryName]]</div>
         </template>
+        
+        <div class="line-qty">[[line.format.qty]]</div>
+        <div class$="{{_getLineContentClass(line.type)}}">
+          <div class="line-content-name">[[line.product.name]]</div>
+          <div class="line-content-format">[[line.format.name]]</div>
+          <div class="line-content-comments">[[line.comments.private]]</div>
+          <template is="dom-repeat" items="{{line.discounts}}">
+            <div class="line-content-discount">[[item.name]]</div>
+          </template>
+        </div>
+        <div class="line-price" hidden$="{{_hidePrice(line)}}">[[_getLineAmount(line)]]</div>
       </div>
-      <div class="line-price" hidden$="{{_hidePrice(line)}}">[[_getLineAmount(line)]]</div>
+
       <template is="dom-if" if="{{lineActionsEnabled}}">
-        <div class="line-actions"><paper-icon-button icon="more-vert" on-tap="_showActions"></paper-icon-button></div>
+        <div class="line-actions"><paper-icon-button icon="more-vert" on-tap="_showLineActions"></paper-icon-button></div>
       </template>
+
     </div>
   </template>
 
@@ -138,11 +155,29 @@ Copyright (c) 2017 Neo
         }
       }
 
-      _showActions(e){
+      _selectLine(e){
+        this.dispatchEvent(new CustomEvent('selected', { detail: e.target, bubbles: true, composed: true }));
+      }
+
+      _showLineActions(e){
         this.dispatchEvent(new CustomEvent('actions', { detail: e.target, bubbles: true, composed: true }));
       }
 
-      _getLineClass(lineType) {
+      _getLineClass(line){
+        let lType = line.type || '';
+        let className = 'line';
+        switch (lType) {
+          case 'pack':
+            if (line.packCompleted == 'N'){
+              className = className + ' line-type-pack-incompleted';  
+              
+            }
+            break;
+        }
+        return className;
+      }
+
+      _getLineContentClass(lineType) {
         let lType = lineType || '';
         let className = 'line-content';
         switch (lType) {
