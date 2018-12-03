@@ -79,7 +79,7 @@ Copyright (c) 2017 Neo
         </template>
         <div class="line">
           <div class="label total-net-amount">Importe</div>
-          <div class="value total-net-amount">[[_formatPrice(totalNetAmount)]]</div>
+          <div class="value total-net-amount">[[_formatPrice(totalAmount)]]</div>
         </div>
         <template is="dom-if" if="{{showChange}}">
           <div class="line">
@@ -115,7 +115,7 @@ Copyright (c) 2017 Neo
             value: {},
             observer: '_dataChanged'
           },
-          totalNetAmount: {
+          totalAmount: {
             type: Number,
             value: 0
           },
@@ -146,7 +146,7 @@ Copyright (c) 2017 Neo
       _dataChanged() {
         if (!this.data) return;
         if (this.data.fiscal) {
-          this.totalNetAmount = this.data.fiscal.totals.netAmount; 
+          this.totalAmount = this.data.fiscal.totals.totalAmount; 
 
           this.totalDeliveredAmount = (this.data.fiscal.totals.deliveredAmount) ? this.data.fiscal.totals.deliveredAmount : 0; 
           this.totalChangeAmount = (this.data.fiscal.totals.changeAmount) ? this.data.fiscal.totals.changeAmount : 0; 
