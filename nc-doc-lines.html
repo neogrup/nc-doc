@@ -65,6 +65,18 @@ Copyright (c) 2017 Neo
         color: black;
         overflow: auto;
       }
+
+      .green{
+        color: #388E3C;
+      }
+
+      .red{
+        color: #D32F2F;
+      }
+
+      paper-icon-button{
+        padding: 2px;
+      }
       
     </style>
 
@@ -72,14 +84,16 @@ Copyright (c) 2017 Neo
       <div id="lines" class="lines">
         <template is="dom-repeat" items="{{lines}}" rendered-item-count="{{renderedCount}}" as="line">
           <template is="dom-if" if="{{_showLine(line)}}">
-              <nc-doc-lines-line
-                      line="{{line}}"
-                      line-actions-enabled="[[lineActionsEnabled]]"
-                      show-line-delivery-order="[[showLineDeliveryOrder]]"
-                      line-amount-type="[[lineAmountType]]"
-                      on-actions="_showLineActions"
-                      on-selected="_selectLine">
-              </nc-doc-lines-line>
+            <nc-doc-lines-line
+                line="{{line}}"
+                line-actions-enabled="[[lineActionsEnabled]]"
+                line-actions="[[dataTicketLinesActions]]"
+                show-line-delivery-order="[[showLineDeliveryOrder]]"
+                line-amount-type="[[lineAmountType]]"
+                on-actions="_showLineActions"
+                on-line-action-selected="_lineActionSelectedPrev"
+                on-selected="_selectLine">
+            </nc-doc-lines-line>
           </template>
                   
         </template>
@@ -89,22 +103,18 @@ Copyright (c) 2017 Neo
       </div>
     </paper-card>
 
-    <paper-dialog id="actions" no-overlap vertical-align="top">
+    <paper-dialog id="actions" no-overlap vertical-align="top" dynamic-align>
       <div class="line-dialog-actions">
-        <paper-icon-button icon="add-circle" style="color: #598900" on-tap="_addQty"></paper-icon-button>
-        <paper-icon-button icon="remove-circle" style="color: #F44336" on-tap="_removeQty"></paper-icon-button>
-        <paper-icon-button icon="create"  on-tap="_selectQty"></paper-icon-button>
-        <paper-icon-button icon="font-download" on-tap="_selectName"></paper-icon-button>
-        <paper-icon-button icon="euro-symbol" on-tap="_selectPrice"></paper-icon-button>
-        <paper-icon-button icon="speaker-notes" on-tap="_selectComments"></paper-icon-button>
-        <paper-icon-button icon="delete" style="color: #F44336"  on-tap="_delete"></paper-icon-button>
+        <template is="dom-repeat" items="{{dataTicketLinesActions}}">
+          <paper-icon-button icon="[[item.icon]]" class$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
+        </template>
       </div>
     </paper-dialog>
 
   </template>
 
   <script>
-    class NcDocLines extends Polymer.Element {
+    class NcDocLines extends ncDocBehavior(Polymer.Element) {
       static get is() {
         return 'nc-doc-lines';
       }
@@ -116,6 +126,7 @@ Copyright (c) 2017 Neo
             value: {},
             observer: '_dataChanged'
           },
+          dataTicketLinesActions: Array,
           lineActionsEnabled: Boolean,
           showCanceledLines: Boolean,
           showLineDeliveryOrder: Boolean,
@@ -172,6 +183,39 @@ Copyright (c) 2017 Neo
         this._currentLine = element.target.line;
         this.shadowRoot.querySelector('#actions').positionTarget = element.detail;
         this.shadowRoot.querySelector('#actions').open();
+      }
+
+      _lineActionSelectedPrev(element){
+        this._currentLine = element.target.line;
+        this._lineActionSelected(element)
+      }
+
+      _lineActionSelected(element){
+        let lineAction = (element.model.item) ? element.model.item.action : element.detail.model.item.action;
+
+        switch (lineAction) {
+          case '_addQty':
+            this._addQty();
+            break;
+          case '_removeQty':
+            this._removeQty();
+            break;
+          case '_selectQty':
+            this._selectQty();
+            break;
+          case '_selectName':
+            this._selectName();
+            break;
+          case '_selectPrice':
+            this._selectPrice();
+            break;
+          case '_selectComments':
+            this._selectComments();
+            break;
+          case '_delete':
+            this._delete();
+            break;
+        }
       }
 
       _addQty(){

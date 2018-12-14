@@ -1,122 +1,139 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js"></script>
 <script>
-  /**
-   * @polymerBehavior
-   */
-  ncDocBehavior  = {
-
-    properties: {
-      language: {
-        type: String,
-        observer: '_languageChanged',
-      }
-    },
-    
-    _validate: function(){
-      let inputs = Polymer.dom(this.root).querySelectorAll("paper-input,paper-textarea");
-      let firstInvalid = false;
-      let i;
-      for (i = 0; i < inputs.length; i++) {
-        inputs[i].validate();
-      }
-      for (i = 0; i < inputs.length; i++) {
-        if (!firstInvalid && inputs[i].invalid===true) {
-          inputs[i].focus();
-          firstInvalid = true;
+/* @polymerMixin */
+  ncDocBehavior = function(baseClass) {
+    return class extends baseClass {
+      static get properties() {
+        return {
+          language: {
+            type: String,
+            observer: '_languageChanged'
+          }
         }
       }
-      return !firstInvalid;
-    },
 
-    _languageChanged: function(){
-      if (typeof(moment)!="undefined") {
-        moment.locale(this.language);
-      }
-    },
-
-    _getTodayDate: function(){
-      return moment().format('YYYY-MM-DDTHH:mm:ss')
-    },
-
-    _getYeterdayDate: function(){
-      return moment().add(-1,'days').format('YYYY-MM-DD');
-    },
-
-    _formatDate: function(date, language, format) {
-      let lFormat = (format) ? format: "L";
-
-      let dateText = "";
-      if (date) {
-        dateText = moment(date).format(lFormat);
-      }
-      return dateText;
-    },
-
-    _formatDateFromNow: function(dateTime, language) {
-
-      let dateTimeText = "";
-      if (dateTime) {
-        if (language == "es"){
-          dateTimeText= moment(dateTime).calendar(null, {
-            lastDay : '[ayer]',
-            sameDay : '[hoy]',
-            nextDay : '[mañana]',
-            lastWeek : 'dddd [pasado]',
-            nextWeek : 'dddd',
-            sameElse : 'L'
-          });
+      _validate(){
+        let inputs = Polymer.dom(this.root).querySelectorAll("paper-input,paper-textarea");
+        let firstInvalid = false;
+        let i;
+        for (i = 0; i < inputs.length; i++) {
+          inputs[i].validate();
         }
-        else if (language == "ca"){
-          dateTimeText= moment(dateTime).calendar(null, {
-            lastDay : '[ahir]',
-            sameDay : '[avui]',
-            nextDay : '[demà]',
-            lastWeek : 'dddd [passat]',
-            nextWeek : 'dddd',
-            sameElse : 'L'
-          });
+        for (i = 0; i < inputs.length; i++) {
+          if (!firstInvalid && inputs[i].invalid===true) {
+            inputs[i].focus();
+            firstInvalid = true;
+          }
         }
-        else{
-          dateTimeText= moment(dateTime).calendar(null, {
-            lastDay : '[yesterday]',
-            sameDay : '[today]',
-            nextDay : '[tomorrow]',
-            lastWeek : '[last] dddd',
-            nextWeek : 'dddd',
-            sameElse : 'L'
-          });
+        return !firstInvalid;
+      }
+
+      _languageChanged(){
+        if (typeof(moment)!="undefined") {
+          moment.locale(this.language);
         }
       }
-      return dateTimeText;
-    },
 
-    _formatDateTimeFromNow: function(dateTime, language) {
-      let dateTimeText = "";
-      if (dateTime) {
-        dateTimeText = moment(dateTime).calendar();
+      _getTodayDate(){
+        return moment().format('YYYY-MM-DDTHH:mm:ss')
       }
-      return dateTimeText;
-    },
 
-    _formatTime: function(time) {
-      let timeText = "";
-      if (time) {
-        timeText = moment(time).format("HH:mm[h]");
+      _getYeterdayDate(){
+        return moment().add(-1,'days').format('YYYY-MM-DD');
       }
-      return timeText;
-    },
 
-    _formatPrice: function(price) {
-      let priceText = ""
-      priceText = accounting.formatMoney(price, "€", 2, ".", ",","%v %s");
-      return priceText;
-    },
+      _formatDate(date, language, format) {
+        let lFormat = (format) ? format: "L";
 
-    _formatNumber: function(number, decimals) {
-      let numberText = "";
-      numberText = accounting.formatNumber(number,decimals, ".", ",")
-      return numberText;
+        let dateText = "";
+        if (date) {
+          dateText = moment(date).format(lFormat);
+        }
+        return dateText;
+      }
+
+      _formatDateFromNow(dateTime, language) {
+        let dateTimeText = "";
+        if (dateTime) {
+          if (language == "es"){
+            dateTimeText= moment(dateTime).calendar(null, {
+              lastDay : '[ayer]',
+              sameDay : '[hoy]',
+              nextDay : '[mañana]',
+              lastWeek : 'dddd [pasado]',
+              nextWeek : 'dddd',
+              sameElse : 'L'
+            });
+          }
+          else if (language == "ca"){
+            dateTimeText= moment(dateTime).calendar(null, {
+              lastDay : '[ahir]',
+              sameDay : '[avui]',
+              nextDay : '[demà]',
+              lastWeek : 'dddd [passat]',
+              nextWeek : 'dddd',
+              sameElse : 'L'
+            });
+          }
+          else{
+            dateTimeText= moment(dateTime).calendar(null, {
+              lastDay : '[yesterday]',
+              sameDay : '[today]',
+              nextDay : '[tomorrow]',
+              lastWeek : '[last] dddd',
+              nextWeek : 'dddd',
+              sameElse : 'L'
+            });
+          }
+        }
+        return dateTimeText;
+      }
+
+      _formatDateTimeFromNow(dateTime, language) {
+        let dateTimeText = "";
+        if (dateTime) {
+          dateTimeText = moment(dateTime).calendar();
+        }
+        return dateTimeText;
+      }
+
+      _formatTime(time) {
+        let timeText = "";
+        if (time) {
+          timeText = moment(time).format("HH:mm[h]");
+        }
+        return timeText;
+      }
+
+      _formatPrice(price) {
+        let priceText = ""
+        priceText = accounting.formatMoney(price, "€", 2, ".", ",","%v %s");
+        return priceText;
+      }
+
+      _formatNumber(number, decimals) {
+        let numberText = "";
+        numberText = accounting.formatNumber(number,decimals, ".", ",")
+        return numberText;
+      }
+
+      _getLineActionClass(element){
+        let className = '';
+        let lineAction = element.action;
+
+        switch (lineAction) {
+          case '_addQty':
+            className = 'green';
+            break;
+          case '_removeQty':
+          case '_delete':
+            className = 'red';
+            break;
+        }
+
+        return className;
+      }
     }
-  };
+  }
 </script>

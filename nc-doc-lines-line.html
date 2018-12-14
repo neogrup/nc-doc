@@ -5,6 +5,7 @@ Copyright (c) 2017 Neo
 
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
@@ -28,7 +29,6 @@ Copyright (c) 2017 Neo
 
       .line {
         min-height: 40px;
-        line-height: 20px;
         @apply --layout-horizontal;
         @apply --layout-center;
         border-color: #BDBDBD;
@@ -96,19 +96,29 @@ Copyright (c) 2017 Neo
       }
       
       .line-actions{
-        font-size: 1em;
+        /* font-size: 1em; */
       }
 
+
+      .green{
+        color: #388E3C;
+      }
+
+      .red{
+        color: #D32F2F;
+      }
+
+      paper-icon-button{
+        padding: 2px;
+      }
     </style>
 
     <div id="line" class$="{{_getLineClass(line)}}" >
 
       <div class="line-container" on-tap="_selectLine">
-
         <template is="dom-if" if="{{showLineDeliveryOrder}}">
           <div class="line-delivery-order-name">[[line.kitchen.deliveryName]]</div>
         </template>
-        
         <div class="line-qty">[[line.format.qty]]</div>
         <div class$="{{_getLineContentClass(line.type)}}">
           <div class="line-content-name">[[line.product.name]]</div>
@@ -122,14 +132,25 @@ Copyright (c) 2017 Neo
       </div>
 
       <template is="dom-if" if="{{lineActionsEnabled}}">
-        <div class="line-actions"><paper-icon-button icon="more-vert" on-tap="_showLineActions"></paper-icon-button></div>
+        <div class="line-actions">
+          <template is="dom-if" if="{{showLinesActionsDialog}}">
+            <paper-icon-button icon="more-vert" on-tap="_showLineActions"></paper-icon-button>
+          </template>
+
+          <template is="dom-if" if="{{!showLinesActionsDialog}}">
+            <template is="dom-repeat" items="{{lineActions}}">
+              <paper-icon-button icon="[[item.icon]]" class$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
+            </template>
+          </template>
+        </div>
+
       </template>
 
     </div>
   </template>
 
   <script>
-    class NcDocLinesLine extends Polymer.mixinBehaviors([ncDocBehavior], Polymer.Element) {
+    class NcDocLinesLine extends ncDocBehavior(Polymer.Element) {
       static get is() {
         return 'nc-doc-lines-line';
       }
@@ -144,6 +165,11 @@ Copyright (c) 2017 Neo
             type: Boolean,
             value: false
           },
+          showLinesActionsDialog: {
+            type: Boolean,
+            value: false
+          },
+          lineActions: Array,
           showLineDeliveryOrder: {
             type: Boolean,
             value: false
@@ -153,6 +179,19 @@ Copyright (c) 2017 Neo
             value: 'net'
           }
         }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (this.lineActions.length <= 2){
+          this.showLinesActionsDialog = false;
+        } else {
+          this.showLinesActionsDialog = true;
+        }
+      }
+
+      _lineActionSelected(e){
+        this.dispatchEvent(new CustomEvent('line-action-selected', { detail: e, bubbles: true, composed: true }));
       }
 
       _selectLine(e){
@@ -200,7 +239,6 @@ Copyright (c) 2017 Neo
         return this._formatPrice(amount);
       }
       
-
       _hidePrice(line) {
         let lAffectPrice = line.affectPrice || 'S';
         let lPrintMode = line.printMode || 'print';
@@ -211,7 +249,6 @@ Copyright (c) 2017 Neo
         }
         return hidePrice;
       }
-
     }
     window.customElements.define(NcDocLinesLine.is, NcDocLinesLine);
 

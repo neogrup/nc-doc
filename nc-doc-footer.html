@@ -50,8 +50,8 @@ Copyright (c) 2017 Neo
         @apply --layout-center;
       }
 
-      .total-net-amount{
-        font-size: 1.2em;
+      .total-amount{
+        font-size: var(--nc-doc-footer-total-font-size);
         font-weight: bolder;
       }
 
@@ -78,8 +78,8 @@ Copyright (c) 2017 Neo
           </div>
         </template>
         <div class="line">
-          <div class="label total-net-amount">Importe</div>
-          <div class="value total-net-amount">[[_formatPrice(totalAmount)]]</div>
+          <div class="label total-amount">Importe</div>
+          <div class="value total-amount">[[_formatPrice(totalAmount)]]</div>
         </div>
         <template is="dom-if" if="{{showChange}}">
           <div class="line">
@@ -103,7 +103,7 @@ Copyright (c) 2017 Neo
   
 
   <script>
-    class NcDocFooter extends Polymer.mixinBehaviors([ncDocBehavior], Polymer.Element) {
+    class NcDocFooter extends ncDocBehavior(Polymer.Element) {
       static get is() {
         return 'nc-doc-footer';
       }

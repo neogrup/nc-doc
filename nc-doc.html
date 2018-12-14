@@ -18,7 +18,9 @@ Copyright (c) 2017 Neo
         @apply --layout-vertical;
         height: 100%;
         width: 100%;
+        font-size: var(--nc-doc-font-size);
       }
+
     </style>
     
     <template is="dom-if" if="{{showDocHeader}}">
@@ -34,6 +36,7 @@ Copyright (c) 2017 Neo
       <div id="doc-lines" style="height: 100%;overflow: auto;">
         <nc-doc-lines
             data="[[data.data.lines]]"
+            data-ticket-lines-actions="[[dataTicketLinesActions]]"
             preview-mode="[[previewMode]]"
             show-canceled-lines="[[showCanceledLines]]"
             line-actions-enabled="[[lineActionsEnabled]]"
@@ -63,6 +66,7 @@ Copyright (c) 2017 Neo
         return {
           language: String,
           data: Object,
+          dataTicketLinesActions: Array,
           showDocHeader: {
             type: Boolean,
             value: false
