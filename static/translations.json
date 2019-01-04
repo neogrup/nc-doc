@@ -1,0 +1,26 @@
+{
+  "en":{
+    "DOC_FOOTER_CHANGED_AMOUNT": "Change",
+    "DOC_FOOTER_DELIVERED_AMOUNT": "Delivered",
+    "DOC_FOOTER_TOTAL_AMOUNT": "Amount",
+    "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Without change",
+    "DOC_HEADER_EMPLOYEE": "Employee",
+    "DOC_LINES_NOT_LINES": "No product has been added"
+  },
+  "es": {
+    "DOC_FOOTER_CHANGED_AMOUNT": "Cambio",
+    "DOC_FOOTER_DELIVERED_AMOUNT": "Entregado",
+    "DOC_FOOTER_TOTAL_AMOUNT": "Importe",
+    "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Sin cambio",
+    "DOC_HEADER_EMPLOYEE": "Empleado",
+    "DOC_LINES_NOT_LINES": "No se ha añadido ningún producto"
+  },
+  "ca":{
+    "DOC_FOOTER_CHANGED_AMOUNT": "Canvi",
+    "DOC_FOOTER_DELIVERED_AMOUNT": "Entregat",
+    "DOC_FOOTER_TOTAL_AMOUNT": "Import",
+    "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Sense canvi",
+    "DOC_HEADER_EMPLOYEE": "Empleat",
+    "DOC_LINES_NOT_LINES": "No s'ha afegit cap producte"
+  }
+}

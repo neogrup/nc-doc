@@ -9,6 +9,7 @@ Copyright (c) 2017 Neo
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 
 <link rel="import" href="nc-doc-behaviour.html">
 
@@ -78,16 +79,16 @@ Copyright (c) 2017 Neo
           </div>
         </template>
         <div class="line">
-          <div class="label total-amount">Importe</div>
+          <div class="label total-amount">{{localize('DOC_FOOTER_TOTAL_AMOUNT')}}</div>
           <div class="value total-amount">[[_formatPrice(totalAmount)]]</div>
         </div>
         <template is="dom-if" if="{{showChange}}">
           <div class="line">
-            <div class="label">Entregado</div>
+            <div class="label">{{localize('DOC_FOOTER_DELIVERED_AMOUNT')}}</div>
             <div class="value">[[_formatPrice(totalDeliveredAmount)]]</div>
           </div>
           <div class="line">
-            <div class="label">Cambio</div>
+            <div class="label">{{localize('DOC_FOOTER_CHANGED_AMOUNT')}}</div>
             <div class="value">[[_formatPrice(totalChangeAmount)]]</div>
           </div>
         </template>
@@ -103,7 +104,7 @@ Copyright (c) 2017 Neo
   
 
   <script>
-    class NcDocFooter extends ncDocBehavior(Polymer.Element) {
+    class NcDocFooter extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], ncDocBehavior(Polymer.Element)) {
       static get is() {
         return 'nc-doc-footer';
       }
@@ -143,6 +144,12 @@ Copyright (c) 2017 Neo
         }
       }
 
+      connectedCallback() {
+        super.connectedCallback();
+        this.useKeyIfMissing = true;
+        this.loadResources(this.resolveUrl('static/translations.json'));
+      }
+
       _dataChanged() {
         if (!this.data) return;
         if (this.data.fiscal) {
@@ -154,7 +161,7 @@ Copyright (c) 2017 Neo
           if (this.totalDeliveredAmount != 0){
             this.showChange = true;
             if (this.showChangeInDialog){
-              this.messageDialog = (this.totalChangeAmount === 0) ? 'Sin cambio' : 'Cambio: ' + this._formatPrice(this.totalChangeAmount);
+              this.messageDialog = (this.totalChangeAmount === 0) ? this.localize('DOC_FOOTER_WITHOUT_CHANGED_AMOUNT') : this.localize('DOC_FOOTER_CHANGED_AMOUNT') + ': ' + this._formatPrice(this.totalChangeAmount);
               this.$.showChangeDialog.open();
             }
             

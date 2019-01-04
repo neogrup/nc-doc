@@ -6,6 +6,9 @@ Copyright (c) 2017 Neo
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+
+<link rel="import" href="nc-doc-behaviour.html">
 
 <dom-module id="nc-doc-header">
   <template>
@@ -59,7 +62,7 @@ Copyright (c) 2017 Neo
       <div class="header">
         <template is="dom-if" if="{{previewMode}}">
           <div class="order-id">#[[data.order]]</div>
-          <div class="order-employee">Empleado: [[data.attendedByName]]</div>
+          <div class="order-employee">{{localize('DOC_HEADER_EMPLOYEE')}}: [[data.attendedByName]]</div>
         </template>
         <template is="dom-if" if="{{!previewMode}}">
           <div class="order-tariff">[[data.tariff.code]]</div>
@@ -71,7 +74,7 @@ Copyright (c) 2017 Neo
   </template>
 
   <script>
-    class NcDocHeader extends Polymer.Element {
+    class NcDocHeader extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], ncDocBehavior(Polymer.Element)) {
       static get is() {
         return 'nc-doc-header';
       }
@@ -85,6 +88,13 @@ Copyright (c) 2017 Neo
           previewMode: Boolean,
         }
       }
+      
+      connectedCallback() {
+        super.connectedCallback();
+        this.useKeyIfMissing = true;
+        this.loadResources(this.resolveUrl('static/translations.json'));
+      }
+
     }
     window.customElements.define(NcDocHeader.is, NcDocHeader);
   </script>

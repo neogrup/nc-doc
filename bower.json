@@ -1,6 +1,6 @@
 {
   "name": "nc-doc",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Polymer component to display document",
   "authors": [
     "edgar.piera@neogrup.com"
@@ -19,6 +19,7 @@
   "ignore": [],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
+    "app-localize-behavior": "PolymerElements/app-localize-behavior#^2.0.1",
     "iron-ajax": "PolymerElements/iron-ajax#^2.0.6",
     "iron-list": "PolymerElements/iron-list#^2.0.12",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.1",

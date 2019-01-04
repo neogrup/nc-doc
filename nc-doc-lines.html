@@ -13,6 +13,7 @@ Copyright (c) 2017 Neo
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 
 <link rel="import" href="nc-doc-lines-line.html">
 
@@ -82,9 +83,10 @@ Copyright (c) 2017 Neo
 
     <paper-card>
       <div id="lines" class="lines">
-        <template is="dom-repeat" items="{{lines}}" rendered-item-count="{{renderedCount}}" as="line">
+        <template is="dom-repeat" items="{{lines}}" as="line">
           <template is="dom-if" if="{{_showLine(line)}}">
             <nc-doc-lines-line
+                language="{{language}}"
                 line="{{line}}"
                 line-actions-enabled="[[lineActionsEnabled]]"
                 line-actions="[[dataTicketLinesActions]]"
@@ -97,8 +99,8 @@ Copyright (c) 2017 Neo
           </template>
                   
         </template>
-        <template is="dom-if" if="{{!renderedCount}}">
-          <p class="lines-empty">No se ha añadido ningún producto</p>
+        <template is="dom-if" if="{{showNoLines}}">
+          <p class="lines-empty">{{localize('DOC_LINES_NOT_LINES')}}</p>
         </template>
       </div>
     </paper-card>
@@ -114,7 +116,7 @@ Copyright (c) 2017 Neo
   </template>
 
   <script>
-    class NcDocLines extends ncDocBehavior(Polymer.Element) {
+    class NcDocLines extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], ncDocBehavior(Polymer.Element)) {
       static get is() {
         return 'nc-doc-lines';
       }
@@ -126,8 +128,13 @@ Copyright (c) 2017 Neo
             value: {},
             observer: '_dataChanged'
           },
+          deliveredProducts: Number,
           dataTicketLinesActions: Array,
           lineActionsEnabled: Boolean,
+          showNoLines: {
+            type: Boolean,
+            value: true
+          },
           showCanceledLines: Boolean,
           showLineDeliveryOrder: Boolean,
           lineAmountType: String,
@@ -148,12 +155,21 @@ Copyright (c) 2017 Neo
         }
       }
 
+      connectedCallback() {
+        super.connectedCallback();
+        this.useKeyIfMissing = true;
+        this.loadResources(this.resolveUrl('static/translations.json'));
+      }
+
       _dataChanged() {
         this.set('lines', []);
+        this.showNoLines = true;
         if (!this.data) return;
         if (this.data.length > 0) {
+          if (this.deliveredProducts !== 0){
+            this.showNoLines = false;
+          }
           this.set('lines', this.data);
-          
         }
         Polymer.dom.flush();
       }

@@ -26,6 +26,7 @@ Copyright (c) 2017 Neo
     <template is="dom-if" if="{{showDocHeader}}">
       <div id="doc-header">
         <nc-doc-header
+          language="{{language}}"
           data="[[data.data]]"
           preview-mode="[[previewMode]]">
         </nc-doc-header>
@@ -35,7 +36,9 @@ Copyright (c) 2017 Neo
     <template is="dom-if" if="{{showDocLines}}">
       <div id="doc-lines" style="height: 100%;overflow: auto;">
         <nc-doc-lines
+            language="{{language}}"
             data="[[data.data.lines]]"
+            delivered-products="[[data.data.stats.deliveredProducts]]"
             data-ticket-lines-actions="[[dataTicketLinesActions]]"
             preview-mode="[[previewMode]]"
             show-canceled-lines="[[showCanceledLines]]"
@@ -49,6 +52,7 @@ Copyright (c) 2017 Neo
     <template is="dom-if" if="{{showDocFooter}}">
       <div id="doc-footer">
         <nc-doc-footer
+          language="{{language}}"
           data="[[data.data]]"
           show-change-in-dialog="[[showChangeInDialog]]">
         </nc-doc-footer>
