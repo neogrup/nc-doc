@@ -113,6 +113,10 @@ Copyright (c) 2017 Neo
       scrollLinesToBottom(){
         this.shadowRoot.querySelector('nc-doc-lines')._scrollLinesToBottom();
       }
+
+      animateLine(lineId){
+        this.shadowRoot.querySelector('nc-doc-lines')._animateLine(lineId);
+      }
     }
     window.customElements.define(NcDoc.is, NcDoc);
   </script>

@@ -28,6 +28,7 @@ Copyright (c) 2017 Neo
       }
 
       .line {
+        position: relative;
         min-height: 40px;
         @apply --layout-horizontal;
         @apply --layout-center;
@@ -111,6 +112,10 @@ Copyright (c) 2017 Neo
       paper-icon-button{
         padding: 2px;
       }
+
+      paper-ripple {
+        color: var(--app-accent-color);
+      }
     </style>
 
     <div id="line" class$="{{_getLineClass(line)}}" >
@@ -146,6 +151,7 @@ Copyright (c) 2017 Neo
 
       </template>
 
+      <paper-ripple id="ripple" initial-opacity=0.5></paper-ripple>
     </div>
   </template>
 
@@ -200,6 +206,11 @@ Copyright (c) 2017 Neo
 
       _showLineActions(e){
         this.dispatchEvent(new CustomEvent('actions', { detail: e.target, bubbles: true, composed: true }));
+      }
+
+      _animateLine(){
+        this.$.ripple.downAction();
+        this.$.ripple.upAction();
       }
 
       _getLineClass(line){

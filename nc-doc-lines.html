@@ -86,6 +86,7 @@ Copyright (c) 2017 Neo
         <template is="dom-repeat" items="{{lines}}" as="line">
           <template is="dom-if" if="{{_showLine(line)}}">
             <nc-doc-lines-line
+                id="slot[[line.id]]"    
                 language="{{language}}"
                 line="{{line}}"
                 line-actions-enabled="[[lineActionsEnabled]]"
@@ -273,6 +274,14 @@ Copyright (c) 2017 Neo
 
       _scrollLinesToBottom(){
         this.shadowRoot.querySelector('#lines').scrollTop = this.shadowRoot.querySelector('#lines').scrollHeight;
+      }
+
+      _animateLine(lineId){
+        let slot;
+        slot = '#slot' + lineId
+        if (this.shadowRoot.querySelector(slot)){
+          this.shadowRoot.querySelector(slot)._animateLine()
+        }
       }
     }
     window.customElements.define(NcDocLines.is, NcDocLines);
