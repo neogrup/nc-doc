@@ -5,94 +5,124 @@ Copyright (c) 2017 Neo
 -->
 <html lang="es">
 <head>
-  <title>nc-doc demo</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <title>nc-doc demo</title>
 
-  <link rel="import" href="../../polymer/polymer-element.html">
-  <link rel="import" href="../../iron-ajax/iron-ajax.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 
-  <link rel="import" href="../nc-doc.html">
-</head>
-<body unresolved>
-<dom-module id="nc-doc-demo">
-  
-  <template>
-    <style>
-      .container{
-        @apply --layout-horizontal;
-        @apply --layout-around-justified;
-        position: absolute;
-        height: calc(100% - 10px); /* padding of container */
-        width: calc(100% - 10px); /* padding of container */
-      }
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
+  <script type="module">
+    import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+    import '@polymer/iron-demo-helpers/demo-snippet';
+  </script>
+
+  <script type="module" src="../nc-doc.js"></script>
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
       div{
-        background-color: #eeeeee;
         height: 50%;
         width: 500px;
       }
     </style>
-    <iron-ajax
-        auto
-        id="getDoc"
-        url="data/doc.json"
-        method="get"
-        handle-as="json"
-        last-response="{{dataDoc}}">
-    </iron-ajax>
-
-    <iron-ajax
-        auto
-        id="getDoc1"
-        url="data/doc1.json"
-        method="get"
-        handle-as="json"
-        last-response="{{dataDoc1}}">
-    </iron-ajax>
-      
-    <div class="container">
-      <div>
-        <nc-doc
-            data="[[dataDoc]]"
-            show-doc-header
-            show-doc-lines
-            show-doc-footer
-            show-canceled-lines="[[showCanceledLines]]"
-            line-actions-enabled="[[lineActionsEnabled]]"
-            on-line-inc="_lineInc"
-            on-line-dec="_lineDec"
-            on-line-del="_lineDel">
-        </nc-doc>
-      </div>
-
-      <div>
-          <nc-doc
-              data="[[dataDoc1]]"
-              show-doc-header
-              show-doc-lines
-              show-doc-footer
-              show-canceled-lines="[[showCanceledLines]]"
-              show-line-delivery-order
-              line-actions-enabled
-              on-line-inc="_lineInc"
-              on-line-dec="_lineDec"
-              on-line-del="_lineDel">
-          </nc-doc>
-        </div> 
-    </div>
-
+  </custom-style>
   
-  </template>
-  <script>
-    class NcDocDemo extends Polymer.Element {
-      static get is() {
-        return 'nc-doc-demo';
+</head>
+<body>
+  <div class="vertical-section-container centered">
+    <h3>POS nc-doc demo</h3>
+    <demo-snippet>
+      <template>
+        <demo-nc-doc-pos></demo-nc-doc-pos>
+      </template>
+    </demo-snippet>
+
+    <h3>Digital Signage nc-doc demo</h3>
+    <demo-snippet>
+      <template>
+        <demo-nc-doc-digital-signage></demo-nc-doc-digital-signage>
+      </template>
+    </demo-snippet>
+  </div>
+
+  <script type="module">
+    import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+    import '@polymer/iron-ajax/iron-ajax.js';
+
+    class DemoNcDocPos extends PolymerElement {
+
+      static get template() {
+        return html`
+          <style>
+            :host{
+              --app-accent-color: #FF9800;
+            }
+          </style>
+
+          <iron-ajax
+              auto
+              id="getDoc"
+              url="data/pos.json"
+              method="get"
+              handle-as="json"
+              last-response="{{dataDoc}}">
+          </iron-ajax>
+            
+          <div>
+            <nc-doc
+                id="doc"
+                data="[[dataDoc]]"
+                language="es"
+                show-doc-header
+                show-doc-lines
+                show-doc-footer
+                line-actions-enabled
+                data-ticket-lines-actions="[[dataTicketLinesActions]]"
+                show-line-delivery-order
+                line-amount-type="total"
+                on-line-inc="_lineInc"
+                on-line-dec="_lineDec"
+                on-line-del="_lineDel">
+            </nc-doc>
+          </div>
+        `;
+      }
+
+      connectedCallback(){
+        super.connectedCallback();
+        this.dataTicketLinesActions=[
+          {
+            "icon": "remove-circle",
+            "action": "_removeQty"
+          },
+          {
+            "icon": "add-circle",
+            "action": "_addQty"
+          },
+          {
+            "icon": "create",
+            "action": "_selectQty"
+          },
+          {
+            "icon": "font-download",
+            "action": "_selectName"
+          },
+          {
+            "icon": "euro-symbol",
+            "action": "_selectPrice"
+          },
+          {
+            "icon": "speaker-notes",
+            "action": "_selectComments"
+          },
+          {
+            "icon": "delete",
+            "action": "_delete"
+          }
+        ]
       }
 
       _lineInc(currentLine){
@@ -110,10 +140,48 @@ Copyright (c) 2017 Neo
         console.log(currentLine.detail);
       }
     }
-    window.customElements.define(NcDocDemo.is, NcDocDemo);
+    window.customElements.define('demo-nc-doc-pos', DemoNcDocPos);
+  </script> 
 
-  </script>
-</dom-module>
-<nc-doc-demo></nc-doc-demo>
+  <script type="module">
+    import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+    import '@polymer/iron-ajax/iron-ajax.js';
+
+    class DemoNcDocDigitalSignage extends PolymerElement {
+
+      static get template() {
+        return html`
+          <style>
+            :host{
+              --app-accent-color: #FF9800;
+            }
+          </style>
+
+          <iron-ajax
+              auto
+              id="getDoc"
+              url="data/digitalSignage.json"
+              method="get"
+              handle-as="json"
+              last-response="{{dataDoc}}">
+          </iron-ajax>
+            
+          <div>
+            <nc-doc
+                id="doc"
+                data="[[dataDoc]]"
+                language="es"
+                show-doc-header
+                show-doc-lines
+                show-doc-footer
+                show-change-in-dialog
+                preview-mode>
+            </nc-doc>
+          </div>
+        `;
+      }
+    }
+    window.customElements.define('demo-nc-doc-digital-signage', DemoNcDocDigitalSignage);
+  </script> 
 </body>
 </html>
