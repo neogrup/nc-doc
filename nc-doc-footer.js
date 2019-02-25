@@ -134,11 +134,15 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
     }
   }
 
+  static get importMeta() { 
+    return import.meta; 
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.useKeyIfMissing = true;
-    this.loadResources(this.resolveUrl('static/translations.json'));
-    // this.loadResources(this.resolveUrl('/static/translations.json'));
+
+    this.loadResources(this.resolveUrl('./static/translations.json'));
   }
 
   _dataChanged() {
