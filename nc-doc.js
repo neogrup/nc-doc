@@ -19,21 +19,38 @@ class NcDoc extends PolymerElement {
       
       <template is="dom-if" if="{{showDocHeader}}">
         <div id="doc-header">
-          <nc-doc-header language="{{language}}" data="[[data.data]]" preview-mode="[[previewMode]]">
+          <nc-doc-header
+              language="{{language}}" 
+              data="[[data.data]]" 
+              preview-mode="[[previewMode]]">
           </nc-doc-header>
         </div>
       </template>
 
       <template is="dom-if" if="{{showDocLines}}">
         <div id="doc-lines" style="height: 100%;overflow: auto;">
-          <nc-doc-lines language="{{language}}" data="[[data.data.lines]]" delivered-products="[[data.data.stats.deliveredProducts]]" data-ticket-lines-actions="[[dataTicketLinesActions]]" preview-mode="[[previewMode]]" show-canceled-lines="[[showCanceledLines]]" line-actions-enabled="[[lineActionsEnabled]]" show-line-delivery-order="[[showLineDeliveryOrder]]" line-amount-type="[[lineAmountType]]">
+          <nc-doc-lines 
+              language="{{language}}" 
+              data="[[data.data.lines]]" 
+              delivered-products="[[data.data.stats.deliveredProducts]]" 
+              data-ticket-lines-actions="[[dataTicketLinesActions]]" 
+              preview-mode="[[previewMode]]" 
+              show-canceled-lines="[[showCanceledLines]]" 
+              line-actions-enabled="[[lineActionsEnabled]]" 
+              show-line-delivery-order="[[showLineDeliveryOrder]]" 
+              line-amount-type="[[lineAmountType]]">
           </nc-doc-lines>
         </div>
       </template>
       
       <template is="dom-if" if="{{showDocFooter}}">
         <div id="doc-footer">
-          <nc-doc-footer language="{{language}}" data="[[data.data]]" show-change-in-dialog="[[showChangeInDialog]]">
+          <nc-doc-footer 
+              language="{{language}}" 
+              data="[[data.data]]" 
+              show-change-in-dialog="[[showChangeInDialog]]" 
+              show-account-balance-in-dialog="[[showAccountBalanceInDialog]]"
+              message-account-balance="[[messageAccountBalance]]">
           </nc-doc-footer>
         </div>
       </template>
@@ -72,6 +89,14 @@ class NcDoc extends PolymerElement {
       showChangeInDialog: {
         type: Boolean,
         value: false
+      },
+      showAccountBalanceInDialog: {
+        type: Boolean,
+        value: false
+      },
+      messageAccountBalance: {
+        type: String,
+        notify : true
       },
       previewMode: {
         type: Boolean,

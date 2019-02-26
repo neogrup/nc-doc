@@ -60,8 +60,19 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
           @apply --layout-center;
         }
 
-        .message{
+        .message-change{
+          text-align: center;
           font-size: 1.8em;
+        }
+
+        .message-account-balance{
+          margin-top: 50px;
+          text-align: center;
+          font-size: 1.8em;
+        }
+
+        .message-account-balance:empty{
+          display:none;
         }
       </style>
 
@@ -92,7 +103,10 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
 
       <paper-dialog id="showChangeDialog">
         <div class="content">
-          <p class="message">[[messageDialog]]</p>
+          <p class="message-change">[[messageDialog]]</p>
+          <template is="dom-if" if="{{showAccountBalanceInDialog}}">
+            <p class="message-account-balance">[[messageAccountBalance]]</p>
+          </template>
         </div>
       </paper-dialog>
     `;
@@ -123,6 +137,8 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         value: 0
       },
       showChangeInDialog: Boolean,
+      showAccountBalanceInDialog: Boolean,
+      messageAccountBalance: String,
       showChange: {
         type: Object,
         value: false

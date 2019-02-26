@@ -49,7 +49,7 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
           font-size: 1.2em;
         }
 
-        .order-customer{
+        .order-custom-desc{
           font-size: 1.2em;
         }
       </style>
@@ -58,7 +58,7 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         <div class="header">
           <template is="dom-if" if="{{previewMode}}">
             <div class="order-id">#[[data.order]]</div>
-            <div class="order-employee">{{localize('DOC_HEADER_EMPLOYEE')}}: [[data.attendedByName]]</div>
+            <div class="order-custom-desc">[[customDesc]]</div>
           </template>
           <template is="dom-if" if="{{!previewMode}}">
             <div class="order-tariff">[[data.tariff.code]]</div>
@@ -75,9 +75,11 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       language: String,
       data: {
         type: Object,
-        value: {}
+        value: {},
+        observer: '_dataChanged'
       },
       previewMode: Boolean,
+      customDesc: String
     }
   }
 
@@ -90,6 +92,19 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
     this.useKeyIfMissing = true;
 
     this.loadResources(this.resolveUrl('./static/translations.json'));
+  }
+
+  _dataChanged() {
+    if (!this.data) return;
+    if (Object.keys(this.data).length === 0) return;
+
+    if (this.data.buyerParty.loyalty){
+      if (this.data.buyerParty.loyalty.account){
+        this.customDesc = this.data.buyerParty.name;
+      }
+    } else {
+      this.customDesc = this.localize('DOC_HEADER_EMPLOYEE') + ': ' +  this.data.attendedByName;
+    }
   }
 }
 window.customElements.define('nc-doc-header', NcDocHeader);
