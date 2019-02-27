@@ -1,0 +1,252 @@
+{
+  "apiVersion": "1",
+  "systemTime": "2019-02-21T12:05:20.4841317+01:00",
+  "data": {
+    "version": "0.2",
+    "type": "ticket",
+    "date": "20190221",
+    "shopCode": "R002",
+    "status": "opened",
+    "sysData": {
+      "created": "2019-02-21T12:04:44.5662601+01:00",
+      "createdBy": "EPL",
+      "edited": "2019-02-21T12:05:17.0442079+01:00",
+      "editedBy": "EPL",
+      "editing": "2019-02-21T12:05:17.0442079+01:00",
+      "editingBy": "EPL"
+    },
+    "buyerParty": {
+      "code": "00000",
+      "name": "Contado",
+      "loyalty": {},
+      "taxIdentification": {
+        "exemption": "R"
+      },
+      "contact": {}
+    },
+    "fiscal": {
+      "currency": {
+        "code": "EUR",
+        "decimals": 0,
+        "decimalsUnitPrice": 0,
+        "decimalsLineAmount": 0
+      },
+      "quantity": {
+        "decimals": 0
+      },
+      "taxes": [
+        {
+          "id": "IVA",
+          "rate": 8,
+          "baseAmount": 5.85,
+          "taxAmount": 0.47,
+          "totalAmount": 6.32
+        }
+      ],
+      "totals": {
+        "grossAmount": 6.16,
+        "netAmount": 5.85,
+        "totalAmount": 6.32,
+        "pendingAmount": 6.32
+      },
+      "drawer": "R00404",
+      "closedTime": "0001-01-01T00:00:00Z",
+      "deliveredTime": "0001-01-01T00:00:00Z"
+    },
+    "lines": [
+      {
+        "id": 1,
+        "product": {
+          "id": "R00093",
+          "name": "Aceitunas",
+          "price": 0.95,
+          "basePrice": 0.88
+        },
+        "qty": 3,
+        "format": {
+          "factor": 1,
+          "qty": 3
+        },
+        "grossQty": 3,
+        "presetTare": "0",
+        "grossAmount": 2.64,
+        "netAmount": 2.64,
+        "totalAmount": 2.85,
+        "taxRuleId": "IVA8",
+        "taxes": [
+          {
+            "id": "IVA",
+            "rate": 8,
+            "baseAmount": 2.64,
+            "taxAmount": 0.21,
+            "totalAmount": 2.85
+          }
+        ],
+        "comments": {},
+        "status": "active",
+        "elementPack": "0",
+        "relLine": 0,
+        "startTime": "0001-01-01T00:00:00Z",
+        "endTime": "0001-01-01T00:00:00Z",
+        "kitchen": {
+          "producedQty": 0.95,
+          "producedTime": "0001-01-01T00:00:00Z",
+          "status": "PE",
+          "deliveryOrder": 2,
+          "deliveryName": "Entrantes",
+          "noteGroup": ""
+        },
+        "sysData": {
+          "created": "0001-01-01T00:00:00Z",
+          "edited": "2019-02-21T12:05:19.8109391+01:00",
+          "editing": "0001-01-01T00:00:00Z"
+        },
+        "affectPrice": "S",
+        "agent": "47275733S"
+      },
+      {
+        "id": 2,
+        "product": {
+          "id": "R00096",
+          "name": "Croquetas",
+          "price": 2,
+          "basePrice": 1.852
+        },
+        "qty": 1,
+        "format": {
+          "factor": 1,
+          "qty": 1
+        },
+        "grossQty": 1,
+        "presetTare": "0",
+        "grossAmount": 1.85,
+        "netAmount": 1.85,
+        "totalAmount": 2,
+        "taxRuleId": "IVA8",
+        "taxes": [
+          {
+            "id": "IVA",
+            "rate": 8,
+            "baseAmount": 1.85,
+            "taxAmount": 0.15,
+            "totalAmount": 2
+          }
+        ],
+        "comments": {},
+        "status": "active",
+        "elementPack": "0",
+        "relLine": 0,
+        "startTime": "0001-01-01T00:00:00Z",
+        "endTime": "0001-01-01T00:00:00Z",
+        "kitchen": {
+          "producedQty": 2,
+          "producedTime": "0001-01-01T00:00:00Z",
+          "status": "AN",
+          "deliveryOrder": 2,
+          "deliveryName": "Entrantes",
+          "noteGroup": ""
+        },
+        "sysData": {
+          "created": "0001-01-01T00:00:00Z",
+          "edited": "2019-02-21T12:05:19.8109391+01:00",
+          "editing": "0001-01-01T00:00:00Z"
+        },
+        "affectPrice": "S",
+        "agent": "47275733S"
+      },
+      {
+        "id": 3,
+        "product": {
+          "id": "R00096",
+          "name": "Croquetas",
+          "price": 2,
+          "basePrice": 1.85
+        },
+        "qty": 1,
+        "format": {
+          "factor": 1,
+          "qty": 1
+        },
+        "grossQty": 1,
+        "presetTare": "0",
+        "grossAmount": 1.86,
+        "discounts": [
+          {
+            "code": "DL10",
+            "name": "10% dto.línea",
+            "rate": 10,
+            "baseAmount": 1.67,
+            "discountAmount": 0.19,
+            "grossAmount": 1.86
+          }
+        ],
+        "netAmount": 1.67,
+        "totalAmount": 1.8,
+        "taxRuleId": "IVA8",
+        "taxes": [
+          {
+            "id": "IVA",
+            "rate": 8,
+            "baseAmount": 1.67,
+            "taxAmount": 0.13,
+            "totalAmount": 1.8
+          }
+        ],
+        "comments": {},
+        "status": "active",
+        "elementPack": "0",
+        "relLine": 0,
+        "startTime": "0001-01-01T00:00:00Z",
+        "endTime": "0001-01-01T00:00:00Z",
+        "kitchen": {
+          "producedQty": 2,
+          "producedTime": "0001-01-01T00:00:00Z",
+          "status": "PE",
+          "deliveryOrder": 2,
+          "deliveryName": "Entrantes",
+          "noteGroup": ""
+        },
+        "sysData": {
+          "created": "0001-01-01T00:00:00Z",
+          "edited": "2019-02-21T12:05:19.8109391+01:00",
+          "editing": "0001-01-01T00:00:00Z"
+        },
+        "affectPrice": "S",
+        "agent": "47275733S"
+      }
+    ],
+    "discounts": [
+      {
+        "code": "DP5",
+        "name": "5% dto.",
+        "rate": 5,
+        "baseAmount": 5.85,
+        "discountAmount": 0.31,
+        "grossAmount": 6.16
+      }
+    ],
+    "order": "145001",
+    "operator": "47275733S",
+    "attendedBy": "47275733S",
+    "attendedByName": "EPL",
+    "location": {
+      "zone": "R002BAR",
+      "spot": "01"
+    },
+    "tariff": {
+      "code": "R001"
+    },
+    "owner": "CAJA10",
+    "lock": {
+      "time": "0001-01-01T00:00:00Z"
+    },
+    "lastModifiedLine": 3,
+    "stats": {
+      "printProformaCount": 0,
+      "printInvoiceCount": 0,
+      "deliveredProducts": 5,
+      "soldProducts": 5
+    }
+  },
+  "error": null
+}

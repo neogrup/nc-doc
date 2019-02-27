@@ -1,0 +1,78 @@
+{
+  "apiVersion": "1",
+  "systemTime": "2019-02-21T12:38:55.9049681+01:00",
+  "data": {
+    "attendedByName": "EPL",
+    "customer": {
+      "name": "Contado"
+    },
+    "date": "20190221",
+    "discounts": [
+      {
+        "baseAmount": 7.65,
+        "code": "DTVP",
+        "discountAmount": 1.53,
+        "id": "5",
+        "name": "Dto. de pie 20,00%",
+        "rate": 20
+      }
+    ],
+    "fiscal": {
+      "totals": {
+        "grossAmount": 7.65,
+        "netAmount": 6.12,
+        "totalAmount": 6.12
+      }
+    },
+    "lines": [
+      {
+        "format": {
+          "qty": 3
+        },
+        "grossAmount": 6.75,
+        "id": 1,
+        "netAmount": 6.75,
+        "product": {
+          "id": "R00101",
+          "name": "Empanadillas",
+          "price": 2.25
+        }
+      },
+      {
+        "discounts": [
+          {
+            "baseAmount": 1,
+            "code": "DL10",
+            "discountAmount": 0.1,
+            "id": "3",
+            "name": "10% dto.línea 10,00%",
+            "rate": 10
+          }
+        ],
+        "format": {
+          "qty": 1
+        },
+        "grossAmount": 1,
+        "id": 2,
+        "netAmount": 0.9,
+        "product": {
+          "id": "R00107",
+          "name": "Tapa frutos secos",
+          "price": 1
+        }
+      }
+    ],
+    "order": "110002",
+    "shop": "R002",
+    "status": "opened",
+    "sysData": {
+      "created": "2019-02-21T12:38:44.000",
+      "createdBy": "47275733S",
+      "edited": "2019-02-21T12:38:55.902",
+      "editedBy": "47275733S"
+    },
+    "type": "ticket",
+    "version": "0.15"
+  },
+  "error": null
+}
