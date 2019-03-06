@@ -3,7 +3,6 @@ import '@polymer/polymer/lib/elements/dom-if.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
 import '@polymer/paper-card/paper-card.js';
 import '@polymer/paper-button/paper-button.js';
-import '@polymer/paper-dialog/paper-dialog.js';
 import { AppLocalizeBehavior } from '@polymer/app-localize-behavior/app-localize-behavior.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import { MixinDoc } from './nc-doc-behavior.js';
@@ -60,20 +59,6 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
           @apply --layout-center;
         }
 
-        .message-change{
-          text-align: center;
-          font-size: 1.8em;
-        }
-
-        .message-account-balance{
-          margin-top: 50px;
-          text-align: center;
-          font-size: 1.8em;
-        }
-
-        .message-account-balance:empty{
-          display:none;
-        }
       </style>
 
       <paper-card>
@@ -100,15 +85,6 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
           </template>
         </div>
       </paper-card>
-
-      <paper-dialog id="showChangeDialog">
-        <div class="content">
-          <p class="message-change">[[messageDialog]]</p>
-          <template is="dom-if" if="{{showAccountBalanceInDialog}}">
-            <p class="message-account-balance">[[messageAccountBalance]]</p>
-          </template>
-        </div>
-      </paper-dialog>
     `;
   }
 
@@ -137,16 +113,6 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         value: 0
       },
       showChangeInDialog: Boolean,
-      showAccountBalanceInDialog: Boolean,
-      messageAccountBalance: String,
-      showChange: {
-        type: Object,
-        value: false
-      },
-      messageDialog: {
-        type: String,
-        value: ''
-      }
     }
   }
 
@@ -173,13 +139,12 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         this.showChange = true;
         if (this.showChangeInDialog){
           this.messageDialog = (this.totalChangeAmount === 0) ? this.localize('DOC_FOOTER_WITHOUT_CHANGED_AMOUNT') : this.localize('DOC_FOOTER_CHANGED_AMOUNT') + ': ' + this._formatPrice(this.totalChangeAmount);
-          this.$.showChangeDialog.open();
+          this.dispatchEvent(new CustomEvent('show-doc-change', {detail: this.messageDialog, bubbles: true, composed: true }));
         }
         
       } else {
         this.showChange = false;
-        this.messageDialog = '';
-        this.$.showChangeDialog.close();
+        this.dispatchEvent(new CustomEvent('hide-doc-change', {bubbles: true, composed: true }));
       }
       
     }

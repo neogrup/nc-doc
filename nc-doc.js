@@ -48,9 +48,7 @@ class NcDoc extends PolymerElement {
           <nc-doc-footer 
               language="{{language}}" 
               data="[[data.data]]" 
-              show-change-in-dialog="[[showChangeInDialog]]" 
-              show-account-balance-in-dialog="[[showAccountBalanceInDialog]]"
-              message-account-balance="[[messageAccountBalance]]">
+              show-change-in-dialog="[[showChangeInDialog]]">
           </nc-doc-footer>
         </div>
       </template>
@@ -89,14 +87,6 @@ class NcDoc extends PolymerElement {
       showChangeInDialog: {
         type: Boolean,
         value: false
-      },
-      showAccountBalanceInDialog: {
-        type: Boolean,
-        value: false
-      },
-      messageAccountBalance: {
-        type: String,
-        notify : true
       },
       previewMode: {
         type: Boolean,
