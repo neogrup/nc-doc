@@ -238,6 +238,8 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     } else {
       amount = (line.packNetAmount) ? line.packNetAmount : line.netAmount;
     }
+
+    amount = (amount) ? amount : 0;
     
     return this._formatPrice(amount);
   }

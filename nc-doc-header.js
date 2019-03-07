@@ -52,6 +52,10 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         .order-custom-desc{
           font-size: 1.2em;
         }
+
+        .order-customer{
+          font-size: 1.2em;
+        }
       </style>
 
       <paper-card>
