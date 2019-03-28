@@ -32,7 +32,7 @@ Copyright (c) 2017 Neo
   
 </head>
 <body>
-  <div class="vertical-section-container centered">
+  <!-- <div class="vertical-section-container centered"> -->
     <h3>POS nc-doc demo</h3>
     <demo-snippet>
       <template>
@@ -40,13 +40,13 @@ Copyright (c) 2017 Neo
       </template>
     </demo-snippet>
 
-    <h3>Digital Signage nc-doc demo</h3>
+    <!-- <h3>Digital Signage nc-doc demo</h3>
     <demo-snippet>
       <template>
         <demo-nc-doc-digital-signage></demo-nc-doc-digital-signage>
       </template>
     </demo-snippet>
-  </div>
+  </div> -->
 
   <script type="module">
     import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
@@ -82,6 +82,7 @@ Copyright (c) 2017 Neo
                 line-actions-enabled
                 data-ticket-lines-actions="[[dataTicketLinesActions]]"
                 show-line-delivery-order
+                show-line-production-info
                 line-amount-type="total"
                 on-line-inc="_lineInc"
                 on-line-dec="_lineDec"

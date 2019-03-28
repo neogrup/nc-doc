@@ -1,252 +1,707 @@
 {
-  "apiVersion": "1",
-  "systemTime": "2019-02-21T12:05:20.4841317+01:00",
-  "data": {
-    "version": "0.2",
-    "type": "ticket",
-    "date": "20190221",
-    "shopCode": "R002",
-    "status": "opened",
-    "sysData": {
-      "created": "2019-02-21T12:04:44.5662601+01:00",
-      "createdBy": "EPL",
-      "edited": "2019-02-21T12:05:17.0442079+01:00",
-      "editedBy": "EPL",
-      "editing": "2019-02-21T12:05:17.0442079+01:00",
-      "editingBy": "EPL"
-    },
-    "buyerParty": {
-      "code": "00000",
-      "name": "Contado",
-      "loyalty": {},
-      "taxIdentification": {
-        "exemption": "R"
-      },
-      "contact": {}
-    },
-    "fiscal": {
-      "currency": {
-        "code": "EUR",
-        "decimals": 0,
-        "decimalsUnitPrice": 0,
-        "decimalsLineAmount": 0
-      },
-      "quantity": {
-        "decimals": 0
-      },
-      "taxes": [
-        {
-          "id": "IVA",
-          "rate": 8,
-          "baseAmount": 5.85,
-          "taxAmount": 0.47,
-          "totalAmount": 6.32
-        }
-      ],
-      "totals": {
-        "grossAmount": 6.16,
-        "netAmount": 5.85,
-        "totalAmount": 6.32,
-        "pendingAmount": 6.32
-      },
-      "drawer": "R00404",
-      "closedTime": "0001-01-01T00:00:00Z",
-      "deliveredTime": "0001-01-01T00:00:00Z"
-    },
-    "lines": [
-      {
-        "id": 1,
-        "product": {
-          "id": "R00093",
-          "name": "Aceitunas",
-          "price": 0.95,
-          "basePrice": 0.88
-        },
-        "qty": 3,
-        "format": {
-          "factor": 1,
-          "qty": 3
-        },
-        "grossQty": 3,
-        "presetTare": "0",
-        "grossAmount": 2.64,
-        "netAmount": 2.64,
-        "totalAmount": 2.85,
-        "taxRuleId": "IVA8",
-        "taxes": [
-          {
-            "id": "IVA",
-            "rate": 8,
-            "baseAmount": 2.64,
-            "taxAmount": 0.21,
-            "totalAmount": 2.85
-          }
-        ],
-        "comments": {},
-        "status": "active",
-        "elementPack": "0",
-        "relLine": 0,
-        "startTime": "0001-01-01T00:00:00Z",
-        "endTime": "0001-01-01T00:00:00Z",
-        "kitchen": {
-          "producedQty": 0.95,
-          "producedTime": "0001-01-01T00:00:00Z",
-          "status": "PE",
-          "deliveryOrder": 2,
-          "deliveryName": "Entrantes",
-          "noteGroup": ""
-        },
-        "sysData": {
-          "created": "0001-01-01T00:00:00Z",
-          "edited": "2019-02-21T12:05:19.8109391+01:00",
-          "editing": "0001-01-01T00:00:00Z"
-        },
-        "affectPrice": "S",
-        "agent": "47275733S"
-      },
-      {
-        "id": 2,
-        "product": {
-          "id": "R00096",
-          "name": "Croquetas",
-          "price": 2,
-          "basePrice": 1.852
-        },
-        "qty": 1,
-        "format": {
-          "factor": 1,
-          "qty": 1
-        },
-        "grossQty": 1,
-        "presetTare": "0",
-        "grossAmount": 1.85,
-        "netAmount": 1.85,
-        "totalAmount": 2,
-        "taxRuleId": "IVA8",
-        "taxes": [
-          {
-            "id": "IVA",
-            "rate": 8,
-            "baseAmount": 1.85,
-            "taxAmount": 0.15,
-            "totalAmount": 2
-          }
-        ],
-        "comments": {},
-        "status": "active",
-        "elementPack": "0",
-        "relLine": 0,
-        "startTime": "0001-01-01T00:00:00Z",
-        "endTime": "0001-01-01T00:00:00Z",
-        "kitchen": {
-          "producedQty": 2,
-          "producedTime": "0001-01-01T00:00:00Z",
-          "status": "AN",
-          "deliveryOrder": 2,
-          "deliveryName": "Entrantes",
-          "noteGroup": ""
-        },
-        "sysData": {
-          "created": "0001-01-01T00:00:00Z",
-          "edited": "2019-02-21T12:05:19.8109391+01:00",
-          "editing": "0001-01-01T00:00:00Z"
-        },
-        "affectPrice": "S",
-        "agent": "47275733S"
-      },
-      {
-        "id": 3,
-        "product": {
-          "id": "R00096",
-          "name": "Croquetas",
-          "price": 2,
-          "basePrice": 1.85
-        },
-        "qty": 1,
-        "format": {
-          "factor": 1,
-          "qty": 1
-        },
-        "grossQty": 1,
-        "presetTare": "0",
-        "grossAmount": 1.86,
-        "discounts": [
-          {
-            "code": "DL10",
-            "name": "10% dto.línea",
-            "rate": 10,
-            "baseAmount": 1.67,
-            "discountAmount": 0.19,
-            "grossAmount": 1.86
-          }
-        ],
-        "netAmount": 1.67,
-        "totalAmount": 1.8,
-        "taxRuleId": "IVA8",
-        "taxes": [
-          {
-            "id": "IVA",
-            "rate": 8,
-            "baseAmount": 1.67,
-            "taxAmount": 0.13,
-            "totalAmount": 1.8
-          }
-        ],
-        "comments": {},
-        "status": "active",
-        "elementPack": "0",
-        "relLine": 0,
-        "startTime": "0001-01-01T00:00:00Z",
-        "endTime": "0001-01-01T00:00:00Z",
-        "kitchen": {
-          "producedQty": 2,
-          "producedTime": "0001-01-01T00:00:00Z",
-          "status": "PE",
-          "deliveryOrder": 2,
-          "deliveryName": "Entrantes",
-          "noteGroup": ""
-        },
-        "sysData": {
-          "created": "0001-01-01T00:00:00Z",
-          "edited": "2019-02-21T12:05:19.8109391+01:00",
-          "editing": "0001-01-01T00:00:00Z"
-        },
-        "affectPrice": "S",
-        "agent": "47275733S"
-      }
-    ],
-    "discounts": [
-      {
-        "code": "DP5",
-        "name": "5% dto.",
-        "rate": 5,
-        "baseAmount": 5.85,
-        "discountAmount": 0.31,
-        "grossAmount": 6.16
-      }
-    ],
-    "order": "145001",
-    "operator": "47275733S",
-    "attendedBy": "47275733S",
-    "attendedByName": "EPL",
-    "location": {
-      "zone": "R002BAR",
-      "spot": "01"
-    },
-    "tariff": {
-      "code": "R001"
-    },
-    "owner": "CAJA10",
-    "lock": {
-      "time": "0001-01-01T00:00:00Z"
-    },
-    "lastModifiedLine": 3,
-    "stats": {
-      "printProformaCount": 0,
-      "printInvoiceCount": 0,
-      "deliveredProducts": 5,
-      "soldProducts": 5
-    }
-  },
-  "error": null
+	"apiVersion": "1",
+	"systemTime": "2019-03-22T10:18:42.7809457+01:00",
+	"data": {
+		"version": "0.2",
+		"type": "ticket",
+		"date": "20190322",
+		"shopCode": "R002",
+		"status": "opened",
+		"sysData": {
+			"created": "2019-03-22T10:05:20Z",
+			"createdBy": "47275733S",
+			"edited": "2019-03-22T10:05:20Z",
+			"editedBy": "47275733S",
+			"editing": "0001-01-01T00:00:00Z",
+			"sent": "2019-03-22T10:18:10Z"
+		},
+		"buyerParty": {
+			"code": "00000",
+			"name": "Contado",
+			"postalAddress": {
+				"detail": "",
+				"city": "",
+				"postalCode": "",
+				"state": "",
+				"country": ""
+			},
+			"loyalty": {
+				
+			},
+			"taxIdentification": {
+				
+			},
+			"contact": {
+				
+			}
+		},
+		"fiscal": {
+			"documentNumber": "0000000",
+			"currency": {
+				"code": "EUR",
+				"decimals": 0,
+				"decimalsUnitPrice": 0,
+				"decimalsLineAmount": 0
+			},
+			"quantity": {
+				"decimals": 0
+			},
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 29.13,
+				"taxAmount": 4.66,
+				"totalAmount": 33.79
+			}],
+			"totals": {
+				"grossAmount": 29.13,
+				"netAmount": 29.13,
+				"totalAmount": 33.79,
+				"pendingAmount": 33.79
+			},
+			"closedTime": "0001-01-01T00:00:00Z",
+			"deliveredTime": "0001-01-01T00:00:00Z",
+			"refundDoc": "0",
+			"refundType": "0",
+			"serviceDate": "0001-01-01T00:00:00Z"
+		},
+		"lines": [{
+			"id": 1,
+			"product": {
+				"id": "R00001",
+				"name": "Coca Cola lata (la c",
+				"price": 2.5,
+				"basePrice": 2.155,
+				"tariffPrice": 2.5
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 2.16,
+			"netAmount": 2.16,
+			"totalAmount": 2.5,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 2.16,
+				"taxAmount": 0.34,
+				"totalAmount": 2.5
+			}],
+			"comments": {
+				"private": "Con hielo"
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "R",
+			"rule": "tarifa",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+        "group":"time,user",
+				"producedQty": 1,
+				"producedTime": "2019-03-22T10:05:46Z",
+				"status": "PD",
+				"deliveryOrder": 1,
+				"deliveryName": "Bebidas",
+				"noteGroup": "0000000003"
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 2,
+			"product": {
+				"id": "R00006",
+				"name": "Fanta Limón lata",
+				"price": 1.1,
+				"basePrice": 0.948,
+				"tariffPrice": 1.1
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 0.95,
+			"netAmount": 0.95,
+			"totalAmount": 1.1,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 0.95,
+				"taxAmount": 0.15,
+				"totalAmount": 1.1
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedQty": 1,
+				"producedTime": "2019-03-22T10:05:46Z",
+				"status": "PD",
+				"deliveryOrder": 1,
+				"deliveryName": "Bebidas",
+				"noteGroup": "0000000003"
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 3,
+			"product": {
+				"id": "R00284",
+				"name": "Tapa calamares rom.",
+				"price": 2.5,
+				"basePrice": 2.155,
+				"tariffPrice": 2.5
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 2.16,
+			"netAmount": 2.16,
+			"totalAmount": 2.5,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 2.16,
+				"taxAmount": 0.34,
+				"totalAmount": 2.5
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+        "group":"time,user",
+				"producedQty": -1,
+				"producedTime": "2019-03-22T10:18:13Z",
+				"status": "PF",
+				"deliveryOrder": 2,
+				"deliveryName": "Entrantes",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 4,
+			"product": {
+				"id": "R00109",
+				"name": "Tapa gambas",
+				"price": 2.9,
+				"basePrice": 2.5,
+				"tariffPrice": 2.9
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 2.5,
+			"netAmount": 2.5,
+			"totalAmount": 2.9,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 2.5,
+				"taxAmount": 0.4,
+				"totalAmount": 2.9
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedQty": -1,
+				"producedTime": "2019-03-22T10:18:14Z",
+				"status": "PF",
+				"deliveryOrder": 2,
+				"deliveryName": "Entrantes",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 5,
+			"product": {
+				"id": "R00098",
+				"name": "Mejillones al vapor",
+				"price": 2.6,
+				"basePrice": 2.241,
+				"tariffPrice": 2.6
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 2.24,
+			"netAmount": 2.24,
+			"totalAmount": 2.6,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 2.24,
+				"taxAmount": 0.36,
+				"totalAmount": 2.6
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+        "group":"time,user",
+				"producedQty": -1,
+				"producedTime": "2019-03-22T10:18:15Z",
+				"status": "PF",
+				"deliveryOrder": 2,
+				"deliveryName": "Entrantes",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 6,
+			"product": {
+				"id": "R00236",
+				"name": "Arroz tres delicias",
+				"price": 2.25,
+				"basePrice": 1.94,
+				"tariffPrice": 2.25
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 1.94,
+			"netAmount": 1.94,
+			"totalAmount": 2.25,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 1.94,
+				"taxAmount": 0.31,
+				"totalAmount": 2.25
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:18:16Z",
+				"status": "PC",
+				"deliveryOrder": 3,
+				"deliveryName": "Primeros",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 7,
+			"product": {
+				"id": "R00285",
+				"name": "Spaghettis boloñesa",
+				"price": 4.75,
+				"basePrice": 4.095,
+				"tariffPrice": 4.75
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 4.09,
+			"netAmount": 4.09,
+			"totalAmount": 4.75,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 4.09,
+				"taxAmount": 0.66,
+				"totalAmount": 4.75
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:18:17Z",
+				"status": "PC",
+				"deliveryOrder": 3,
+				"deliveryName": "Primeros",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 8,
+			"product": {
+				"id": "R00263",
+				"name": "Pechuga empanada",
+				"price": 3.15,
+				"basePrice": 2.716,
+				"tariffPrice": 3.15
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 2.72,
+			"netAmount": 2.72,
+			"totalAmount": 3.15,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 2.72,
+				"taxAmount": 0.43,
+				"totalAmount": 3.15
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:15:39Z",
+				"status": "FI",
+				"deliveryOrder": 4,
+				"deliveryName": "Segundos",
+				"noteGroup": "0000000002"
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 9,
+			"product": {
+				"id": "R00262",
+				"name": "Lomo con patatas",
+				"price": 3,
+				"basePrice": 2.586,
+				"tariffPrice": 3
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 2.59,
+			"netAmount": 2.59,
+			"totalAmount": 3,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 2.59,
+				"taxAmount": 0.41,
+				"totalAmount": 3
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:15:39Z",
+				"status": "FI",
+				"deliveryOrder": 4,
+				"deliveryName": "Segundos",
+				"noteGroup": "0000000002"
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 10,
+			"product": {
+				"id": "R00315",
+				"name": "Arroz con leche",
+				"price": 2.15,
+				"basePrice": 1.853,
+				"tariffPrice": 2.15
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 1.85,
+			"netAmount": 1.85,
+			"totalAmount": 2.15,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 1.85,
+				"taxAmount": 0.3,
+				"totalAmount": 2.15
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:16:12Z",
+				"status": "FI",
+				"deliveryOrder": 5,
+				"deliveryName": "Postres",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 11,
+			"product": {
+				"id": "R00313",
+				"name": "Flan de huevo",
+				"price": 1.75,
+				"basePrice": 1.509,
+				"tariffPrice": 1.75
+			},
+			"qty": 1,
+			"format": {
+				"factor": 1,
+				"qty": 1
+			},
+			"grossQty": 1,
+			"grossAmount": 1.51,
+			"netAmount": 1.51,
+			"totalAmount": 1.75,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 1.51,
+				"taxAmount": 0.24,
+				"totalAmount": 1.75
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:16:12Z",
+				"status": "FI",
+				"deliveryOrder": 5,
+				"deliveryName": "Postres",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		},
+		{
+			"id": 12,
+			"product": {
+				"id": "R00056",
+				"name": "Café con leche NC_",
+				"price": 2.57,
+				"basePrice": 2.216,
+				"tariffPrice": 2.57
+			},
+			"qty": 2,
+			"format": {
+				"factor": 1,
+				"qty": 2
+			},
+			"grossQty": 2,
+			"grossAmount": 4.43,
+			"netAmount": 4.43,
+			"totalAmount": 5.14,
+			"taxRuleId": "IVASTD",
+			"taxes": [{
+				"id": "IVA",
+				"rate": 16,
+				"baseAmount": 4.43,
+				"taxAmount": 0.71,
+				"totalAmount": 5.14
+			}],
+			"comments": {
+				
+			},
+			"status": "active",
+			"refLine": 0,
+			"businessSource": "S",
+			"startTime": "0001-01-01T00:00:00Z",
+			"endTime": "0001-01-01T00:00:00Z",
+			"kitchen": {
+				"producedTime": "2019-03-22T10:16:12Z",
+				"status": "FI",
+				"deliveryOrder": 5,
+				"deliveryName": "Postres",
+				"noteGroup": ""
+			},
+			"sysData": {
+				"created": "0001-01-01T00:00:00Z",
+				"edited": "0001-01-01T00:00:00Z",
+				"editing": "0001-01-01T00:00:00Z",
+				"sent": "0001-01-01T00:00:00Z"
+			},
+			"affectPrice": "S",
+			"agent": "47275733S"
+		}],
+		"order": "110001",
+		"operator": "47275733S",
+		"attendedBy": "47275733S",
+		"attendedByName": "EPL",
+		"location": {
+			"zone": "R002INT",
+			"spot": "01"
+		},
+		"tariff": {
+			"code": "R002",
+			"date": "20190322"
+		},
+		"owner": "CAJA03",
+		"lock": {
+			"owner": "CAJA05",
+			"status": "CU",
+			"time": "0001-01-01T00:00:00Z"
+		},
+		"lastModifiedLine": 0,
+		"stats": {
+			"printProformaCount": 0,
+			"printInvoiceCount": 0,
+			"deliveredProducts": 13,
+			"soldProducts": 13
+		},
+		"production": {
+			"printed": "S"
+		}
+	},
+	"error": null
 }

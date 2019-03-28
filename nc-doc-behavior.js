@@ -36,6 +36,37 @@ let ncDocBehavior = (base) =>
       return !firstInvalid;
     }
 
+    _formatDate(date, language, format) {
+      let lLanguage = (language) ? language : 'es';
+      moment.locale(lLanguage);
+      let lFormat = (format) ? format : "L";
+      let dateText = "";
+      if (date) {
+        // Check "date" UTC
+        if (date.substr(-1,1).toUpperCase() === "Z"){
+          dateText = moment.utc(date).format(lFormat);
+        } else {
+          dateText = moment(date).format(lFormat);
+        }
+      }
+      return dateText;
+    }
+    
+    _formatTime(time, language) {
+      let lLanguage = (language) ? language : 'es';
+      moment.locale(lLanguage);
+      let timeText = "";
+      if (time) {
+        // Check "time" UTC
+        if (time.substr(-1,1).toUpperCase() === "Z"){
+          timeText = moment.utc(time).format("HH:mm[h]");
+        } else {
+          timeText = moment(time).format("HH:mm[h]");
+        }
+      }
+      return timeText;
+    }
+
     _languageChanged(){
       if (typeof(moment)!="undefined") {
         moment.locale(this.language);
@@ -43,8 +74,9 @@ let ncDocBehavior = (base) =>
     }
 
     _formatPrice(price) {
+      let lPrice = (price) ? price : 0;
       let priceText = ""
-      priceText = formatMoney(price, {symbol: "€", precision: 2, thousand: ".", decimal: ",", format: "%v %s"});
+      priceText = formatMoney(lPrice, {symbol: "€", precision: 2, thousand: ".", decimal: ",", format: "%v %s"});
       return priceText;
     }
 

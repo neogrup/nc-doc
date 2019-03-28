@@ -100,7 +100,19 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
         <div id="lines" class="lines">
           <template is="dom-repeat" items="{{lines}}" as="line">
             <template is="dom-if" if="{{_showLine(line)}}">
-              <nc-doc-lines-line id="slot[[line.id]]" language="{{language}}" line="{{line}}" line-actions-enabled="[[lineActionsEnabled]]" line-actions="[[dataTicketLinesActions]]" show-line-delivery-order="[[showLineDeliveryOrder]]" line-amount-type="[[lineAmountType]]" on-actions="_showLineActions" on-line-action-selected="_lineActionSelectedPrev" on-selected="_selectLine">
+              <nc-doc-lines-line 
+                  id="slot[[line.id]]" 
+                  language="{{language}}" 
+                  line="{{line}}" 
+                  line-actions-enabled="[[lineActionsEnabled]]" 
+                  line-actions="[[dataTicketLinesActions]]" 
+                  show-line-delivery-order="[[showLineDeliveryOrder]]" 
+                  show-line-group-info="[[showLineGroupInfo]]" 
+                  show-line-production-status="[[showLineProductionStatus]]"
+                  line-amount-type="[[lineAmountType]]" 
+                  on-actions="_showLineActions" 
+                  on-line-action-selected="_lineActionSelectedPrev" 
+                  on-selected="_selectLine">
               </nc-doc-lines-line>
             </template>
                     
@@ -139,6 +151,8 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       },
       showCanceledLines: Boolean,
       showLineDeliveryOrder: Boolean,
+      showLineGroupInfo: Boolean,
+      showLineProductionStatus: Boolean,
       lineAmountType: String,
       previewMode: Boolean,
       lines: {
@@ -234,6 +248,9 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       case '_selectComments':
         this._selectComments();
         break;
+      case '_selectDeliveryOrder':
+        this._selectDeliveryOrder();
+        break;
       case '_delete':
         this._delete();
         break;
@@ -270,6 +287,11 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
   _selectComments(){
     this.shadowRoot.querySelector('#actions').close();
     this.dispatchEvent(new CustomEvent('line-select-comments', { detail: this._currentLine, bubbles: true, composed: true }));
+  }
+
+  _selectDeliveryOrder(){
+    this.dispatchEvent(new CustomEvent('line-select-delivery-order', { detail: this._currentLine, bubbles: true, composed: true }));
+    this.shadowRoot.querySelector('#actions').close();
   }
 
   _delete(){

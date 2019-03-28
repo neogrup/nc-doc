@@ -38,6 +38,8 @@ class NcDoc extends PolymerElement {
               show-canceled-lines="[[showCanceledLines]]" 
               line-actions-enabled="[[lineActionsEnabled]]" 
               show-line-delivery-order="[[showLineDeliveryOrder]]" 
+              show-line-group-info="[[showLineGroupInfo]]" 
+              show-line-production-status="[[showLineProductionStatus]]"
               line-amount-type="[[lineAmountType]]">
           </nc-doc-lines>
         </div>
@@ -77,6 +79,14 @@ class NcDoc extends PolymerElement {
         value: false
       },
       showLineDeliveryOrder: {
+        type: Boolean,
+        value: false
+      },
+      showLineGroupInfo: {
+        type: Boolean,
+        value: false
+      },
+      showLineProductionStatus: {
         type: Boolean,
         value: false
       },
