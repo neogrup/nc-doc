@@ -38,23 +38,15 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         .order-id{
           @apply --layout-flex;
           font-size: 1.2em;
-        }
-
-        .order-employee{
-          font-size: 1.2em;
-        }
-
-        .order-tariff{
-          @apply --layout-flex;
-          font-size: 1.2em;
-        }
-
-        .order-custom-desc{
-          font-size: 1.2em;
+          white-space: nowrap;
+          margin-right: 5px;
         }
 
         .order-customer{
           font-size: 1.2em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       </style>
 
@@ -62,10 +54,10 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         <div class="header">
           <template is="dom-if" if="{{previewMode}}">
             <div class="order-id">#[[data.order]]</div>
-            <div class="order-custom-desc">[[customDesc]]</div>
+            <div class="order-customer">[[customDesc]]</div>
           </template>
           <template is="dom-if" if="{{!previewMode}}">
-            <div class="order-tariff">[[data.tariff.code]]</div>
+            <div class="order-id">#[[data.order]] - [[data.tariff.code]]</div>
             <div class="order-customer">[[data.buyerParty.name]]</div>
           </template>
 
