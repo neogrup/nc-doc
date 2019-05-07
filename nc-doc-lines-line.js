@@ -177,7 +177,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
         .bg-pe{
           color: var(--app-primary-color);
-          background-color: #F2f2f2;
+          background-color: #FFFFFF;
         }
 
         .bg-pc {
