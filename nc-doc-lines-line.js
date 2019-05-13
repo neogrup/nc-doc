@@ -398,52 +398,55 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         break;
     }
 
-
-    let lStatus = this.line.kitchen.status || 'FI';
     this.classNameStatus = 'line-qty';
+    if (this.line.kitchen){
 
-    if (this.showLineProductionStatus){
-      switch (lStatus) {
-        case 'OK':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-ok';
-          break;
-        case 'PE':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pe';
-          break;
-        case 'FI':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-fi';
-          break;
-        case 'MO':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-an';
-          break;
-        case 'AN':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-an';
-          break;
-        case 'PC':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pc';
-          break;
-        case 'PF':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pf';
-          break;
-        case 'PD':
-          this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pd';
-          break;
+      let lStatus = this.line.kitchen.status || 'FI';
+      
+
+      if (this.showLineProductionStatus){
+        switch (lStatus) {
+          case 'OK':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-ok';
+            break;
+          case 'PE':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pe';
+            break;
+          case 'FI':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-fi';
+            break;
+          case 'MO':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-an';
+            break;
+          case 'AN':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-an';
+            break;
+          case 'PC':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pc';
+            break;
+          case 'PF':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pf';
+            break;
+          case 'PD':
+            this.classNameStatus = this.classNameStatus + ' line-qty-default bg-pd';
+            break;
+        }
       }
-    }
-    
-    let lDeliveryOrder = this.line.kitchen.deliveryOrder;
-    this.classNameDeliveryOrder = 'line-delivery-order';
-    this.classNameDeliveryOrder = this.classNameDeliveryOrder + ' bg-delivery-order-' + lDeliveryOrder;
+      
+      let lDeliveryOrder = this.line.kitchen.deliveryOrder;
+      this.classNameDeliveryOrder = 'line-delivery-order';
+      this.classNameDeliveryOrder = this.classNameDeliveryOrder + ' bg-delivery-order-' + lDeliveryOrder;
 
 
-    this.showGroupInfo = false;
-    let lGroup =  '';
-    if (this.line.group){
-      lGroup =  this.line.group;
-    }
+      this.showGroupInfo = false;
+      let lGroup =  '';
+      if (this.line.group){
+        lGroup =  this.line.group;
+      }
 
-    if ((this.showLineGroupInfo) && (this.line.kitchen.producedTime != '0001-01-01T00:00:00Z') && (lGroup === 'user,time')) {
-      this.showGroupInfo = true;
+      if ((this.showLineGroupInfo) && (this.line.kitchen.producedTime != '0001-01-01T00:00:00Z') && (lGroup === 'user,time')) {
+        this.showGroupInfo = true;
+      }
     }
   }
 }
