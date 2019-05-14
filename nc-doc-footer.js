@@ -66,7 +66,7 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
           <template is="dom-repeat" items="{{data.discounts}}">
             <div class="line">
               <div class="label">[[item.name]]</div>
-              <div class="value">-[[_formatPrice(item.discountAmount)]]</div>
+              <div class="value">-[[_getDiscountAmount(item)]]</div>
             </div>
           </template>
           <div class="line">
@@ -113,6 +113,10 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         value: 0
       },
       showChangeInDialog: Boolean,
+      showAmountsIncludingTaxes: {
+        type: Boolean,
+        value: false
+      }
     }
   }
 
@@ -148,6 +152,18 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       }
       
     }
+  }
+
+  _getDiscountAmount(discount){
+    let amount;
+
+    if (this.showAmountsIncludingTaxes){
+      amount = discount.discountAmountWithTaxes;
+    } else {
+      amount = discount.discountAmount;
+    }
+    
+    return this._formatPrice(amount);
   }
 }
 window.customElements.define('nc-doc-footer', NcDocFooter);

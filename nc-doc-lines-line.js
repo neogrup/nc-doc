@@ -324,9 +324,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         value: false,
         observer: '_lineChanged'
       },
-      lineAmountType: {
-        type: String,
-        value: 'net'
+      showAmountsIncludingTaxes: {
+        type: Boolean,
+        value: false
       }
     }
   }
@@ -362,7 +362,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
   _getLineAmount(line){
     let amount;
 
-    if (this.lineAmountType === 'total'){
+    if (this.showAmountsIncludingTaxes){
       amount = (line.packNetAmount) ? line.packNetAmount : line.totalAmount;
     } else {
       amount = (line.packNetAmount) ? line.packNetAmount : line.netAmount;
