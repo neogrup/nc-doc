@@ -40,7 +40,7 @@ class NcDoc extends PolymerElement {
               show-line-delivery-order="[[showLineDeliveryOrder]]" 
               show-line-group-info="[[showLineGroupInfo]]" 
               show-line-production-status="[[showLineProductionStatus]]"
-              line-amount-type="[[lineAmountType]]">
+              show-amounts-including-taxes="[[showAmountsIncludingTaxes]]">
           </nc-doc-lines>
         </div>
       </template>
@@ -50,7 +50,8 @@ class NcDoc extends PolymerElement {
           <nc-doc-footer 
               language="{{language}}" 
               data="[[data.data]]" 
-              show-change-in-dialog="[[showChangeInDialog]]">
+              show-change-in-dialog="[[showChangeInDialog]]"
+              show-amounts-including-taxes="[[showAmountsIncludingTaxes]]">
           </nc-doc-footer>
         </div>
       </template>
@@ -102,9 +103,9 @@ class NcDoc extends PolymerElement {
         type: Boolean,
         value: false
       },
-      lineAmountType: {
-        type: String,
-        value: 'gross'
+      showAmountsIncludingTaxes: {
+        type: Boolean,
+        value: false
       }
     }
   }

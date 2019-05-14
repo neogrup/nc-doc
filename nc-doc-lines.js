@@ -109,7 +109,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
                   show-line-delivery-order="[[showLineDeliveryOrder]]" 
                   show-line-group-info="[[showLineGroupInfo]]" 
                   show-line-production-status="[[showLineProductionStatus]]"
-                  line-amount-type="[[lineAmountType]]" 
+                  show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
                   on-actions="_showLineActions" 
                   on-line-action-selected="_lineActionSelectedPrev" 
                   on-selected="_selectLine">
@@ -153,7 +153,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       showLineDeliveryOrder: Boolean,
       showLineGroupInfo: Boolean,
       showLineProductionStatus: Boolean,
-      lineAmountType: String,
+      showAmountsIncludingTaxes: Boolean,
       previewMode: Boolean,
       lines: {
         type: Array,
