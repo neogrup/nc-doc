@@ -257,6 +257,9 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       case '_showInfo':
         this._showInfo();
         break;
+      case '_moveLine':
+        this._moveLine();
+        break;
     }
   }
 
@@ -304,6 +307,11 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
 
   _showInfo(){
     this.dispatchEvent(new CustomEvent('line-show-info', { detail: this._currentLine, bubbles: true, composed: true }));
+    this.shadowRoot.querySelector('#actions').close();
+  }
+
+  _moveLine(){
+    this.dispatchEvent(new CustomEvent('line-move', { detail: this._currentLine, bubbles: true, composed: true }));
     this.shadowRoot.querySelector('#actions').close();
   }
 
