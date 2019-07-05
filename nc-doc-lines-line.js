@@ -3,6 +3,7 @@ import '@polymer/polymer/lib/elements/dom-if.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-icons/av-icons.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import { MixinDoc } from './nc-doc-behavior.js';
 class NcDocLinesLine extends MixinDoc(PolymerElement) {
@@ -98,13 +99,19 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
           padding-left: 10px;
         }
 
-        .line-type-pack-incompleted{
-          background-color: var(--error-color);
-        }
-
         .line-type-pack-line{
           padding-left: 20px;
-          color: #9E9E9E;
+          color: #26A69A;
+        }
+
+        .line-content-icon {
+          padding-left: 10px
+        }
+
+        .line-content-icon > iron-icon{
+          width: 12px;
+          color: var(--error-color);
+
         }
 
         .line-content-name {
@@ -116,9 +123,22 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         }
 
         .line-content-comments {
-          font-size: 0.8em;
+          font-size: 0.9em;
           color: #9E9E9E;
           font-style: italic;
+        }
+
+        .line-content-packs {
+          font-size: 0.9em;
+          font-style: italic;
+        }
+        
+        .line-content-packs-even {
+          color: #26A69A;
+        }
+
+        .line-content-packs-odd {
+          color: #FF9800;
         }
 
         .line-content-discount {
@@ -252,43 +272,54 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         </div>
       </template>
 
-      <div id="line" class\$="{{className}}">
-          
-          <div class="line-container" on-tap="_selectLine">
-            <template is="dom-if" if="{{showLineDeliveryOrder}}">
-              <div class\$="{{classNameDeliveryOrder}}"></div>
-              <div class="line-delivery-order-name">[[line.kitchen.deliveryName]]</div>
-            </template>
-            <div class\$="{{classNameStatus}}">[[line.format.qty]]</div>
-
-            <div class\$="{{classNameContent}}">
-              <div class="line-content-name">[[line.product.name]]</div>
-              <div class="line-content-format">[[line.format.name]]</div>
-              <div class="line-content-comments">[[line.comments.private]]</div>
-              <template is="dom-repeat" items="{{line.discounts}}">
-                <div class="line-content-discount">[[item.name]]</div>
+      <template is="dom-if" if="{{showLine}}">
+        <div id="line" class\$="{{className}}">
+            
+            <div class="line-container" on-tap="_selectLine">
+              <template is="dom-if" if="{{showLineDeliveryOrder}}">
+                <div class\$="{{classNameDeliveryOrder}}"></div>
+                <div class="line-delivery-order-name">[[line.kitchen.deliveryName]]</div>
               </template>
-            </div>
-            <div class="line-price" hidden\$="{{_hidePrice(line)}}">[[_getLineAmount(line)]]</div>
-          </div>
-
-          <template is="dom-if" if="{{lineActionsEnabled}}">
-            <div class="line-actions">
-              <template is="dom-if" if="{{showLinesActionsDialog}}">
-                <paper-icon-button icon="more-vert" on-tap="_showLineActions"></paper-icon-button>
-              </template>
-
-              <template is="dom-if" if="{{!showLinesActionsDialog}}">
-                <template is="dom-repeat" items="{{lineActions}}">
-                  <paper-icon-button icon="[[item.icon]]" class\$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
+              <div class\$="{{classNameStatus}}">[[line.format.qty]]</div>
+              
+              <div class\$="{{classNameContent}}">
+                <div class="line-content-name">[[line.product.name]]</div>
+                <div class="line-content-format">[[line.format.name]]</div>
+                <div class="line-content-comments">[[line.comments.private]]</div>
+                <template is="dom-if" if="{{showLinePackContent}}">
+                  <div class="line-content-packs">
+                    <template is="dom-repeat" items="{{packContentList}}" as="item">
+                      <span class\$="{{_getPackContentListItemClass(index)}}">{{item}}</span>
+                    </template>
+                  </div>
                 </template>
+                <template is="dom-repeat" items="{{line.discounts}}">
+                  <div class="line-content-discount">[[item.name]]</div>
+                </template>
+              </div>
+              <template is="dom-if" if="{{showLinePackIncomplete}}">
+                <div class="line-content-icon"><iron-icon icon="av:fiber-manual-record"></iron-icon></div>
               </template>
+              <div class="line-price" hidden\$="{{_hidePrice(line)}}">[[lineAmount]]</div>
             </div>
 
-          </template>
+            <template is="dom-if" if="{{lineActionsEnabled}}">
+              <div class="line-actions">
+                <template is="dom-if" if="{{showLinesActionsDialog}}">
+                  <paper-icon-button icon="more-vert" on-tap="_showLineActions"></paper-icon-button>
+                </template>
 
-          <paper-ripple id="ripple" initial-opacity="0.5"></paper-ripple>
-      </div>
+                <template is="dom-if" if="{{!showLinesActionsDialog}}">
+                  <template is="dom-repeat" items="{{lineActions}}">
+                    <paper-icon-button icon="[[item.icon]]" class\$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
+                  </template>
+                </template>
+              </div>
+            </template>
+
+            <paper-ripple id="ripple" initial-opacity="0.5"></paper-ripple>
+        </div>
+      </template>
     `;
   }
 
@@ -297,8 +328,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       language: String,
       line: {
         type: Object,
-        value: {},
-        observer: '_lineChanged'
+        value: {}
       },
       lineActionsEnabled: {
         type: Boolean,
@@ -312,23 +342,34 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       showLineDeliveryOrder: {
         type: Boolean,
         value: true,
-        observer: '_lineChanged'
       },
       showLineGroupInfo: {
         type: Boolean,
         value: false,
-        observer: '_lineChanged'
       },
       showLineProductionStatus: {
         type: Boolean,
         value: false,
-        observer: '_lineChanged'
       },
       showAmountsIncludingTaxes: {
         type: Boolean,
         value: false
+      },
+      showLinePackMandatory:{
+        type: Boolean,
+        value: false,
+      },
+      showPacksReduced: {
+        type: Boolean,
+        value: false,
       }
     }
+  }
+
+  static get observers() {
+    return [
+      '_lineChanged(line.*, showLineDeliveryOrder, showLineGroupInfo, showLineProductionStatus, showLinePackMandatory, showPacksReduced)'
+    ];
   }
 
   connectedCallback() {
@@ -355,21 +396,21 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
   }
 
   _animateLine(){
-    this.$.ripple.downAction();
-    this.$.ripple.upAction();
-  }
-
-  _getLineAmount(line){
-    let amount;
-
-    if (this.showAmountsIncludingTaxes){
-      amount = (line.packNetAmount) ? line.packNetAmount : line.totalAmount;
-    } else {
-      amount = (line.packNetAmount) ? line.packNetAmount : line.netAmount;
+    if (this.shadowRoot.querySelector('paper-ripple')){
+      this.shadowRoot.querySelector('paper-ripple').downAction();
+      this.shadowRoot.querySelector('paper-ripple').upAction();
     }
-    
-    return this._formatPrice(amount);
   }
+  
+
+  _getPackContentListItemClass(itemIndex){
+    let className = 'line-content-packs-even';
+    if (itemIndex % 2 != 0){
+      className = 'line-content-packs-odd';
+    }
+    return className;
+  }
+
 
   _hidePrice(line) {
     let lAffectPrice = line.affectPrice || 'S';
@@ -387,16 +428,54 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     let lType = this.line.type || '';
     this.className = 'line';
     this.classNameContent = 'line-content';
+    this.showLine = true;
+    this.showLinePackContent = false;
+    this.showLinePackIncomplete = false;
+    this.packContentList = [];
+
+    this.lineAmount = '';
+    let amount = '';
+
+
+    if (this.showAmountsIncludingTaxes){
+      amount = (this.line.packNetAmount) ? this.line.packNetAmount : this.line.totalAmount;
+    } else {
+      amount = (this.line.packNetAmount) ? this.line.packNetAmount : this.line.netAmount;
+    }
+
     switch (lType) {
       case 'pack':
-        if (this.line.packCompleted == 'N'){
-          this.className = this.className + ' line-type-pack-incompleted';  
+        if (this.showPacksReduced){
+          this.showLinePackContent = true;
+
+          if (this.line.packTotalAmount){
+            amount = this.line.packTotalAmount;
+          }
+
         }
+        if (this.line.packCompleted == 'N'){
+          this.showLinePackIncomplete = true;
+        }
+
+        if (this.line.comments.packContent){
+          this.packContentList = this.line.comments.packContent.split('|');
+        }
+
         break;
       case 'packLine':
+        if ((!this.showLinePackMandatory) && (this.line.mandatory === 'S')){
+          this.showLine = false;
+        }
+
+        if (this.showPacksReduced){
+          this.showLine = false;
+        }
         this.classNameContent = this.classNameContent + ' line-type-pack-line';
         break;
     }
+
+
+    this.lineAmount = this._formatPrice(amount);
 
     this.classNameStatus = 'line-qty';
     if (this.line.kitchen){
