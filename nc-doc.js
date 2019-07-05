@@ -40,7 +40,9 @@ class NcDoc extends PolymerElement {
               show-line-delivery-order="[[showLineDeliveryOrder]]" 
               show-line-group-info="[[showLineGroupInfo]]" 
               show-line-production-status="[[showLineProductionStatus]]"
-              show-amounts-including-taxes="[[showAmountsIncludingTaxes]]">
+              show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
+              show-line-pack-mandatory="[[showLinePackMandatory]]"
+              show-packs-reduced="[[showPacksReduced]]">
           </nc-doc-lines>
         </div>
       </template>
@@ -104,6 +106,14 @@ class NcDoc extends PolymerElement {
         value: false
       },
       showAmountsIncludingTaxes: {
+        type: Boolean,
+        value: false
+      },
+      showLinePackMandatory: {
+        type: Boolean,
+        value: false
+      },
+      showPacksReduced: {
         type: Boolean,
         value: false
       }

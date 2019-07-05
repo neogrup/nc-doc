@@ -53,7 +53,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
         }
 
         paper-dialog{
-          margin:  -5px 20px;
+          margin:  40px 30px;
           padding: 0;
         }
 
@@ -61,7 +61,9 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
         .line-dialog-actions {
           /* @apply --layout-horizontal; */
           /* @apply --layout-center; */
-          @apply --layout-vertical;
+          /* @apply --layout-vertical; */
+          width: 110px;
+
         }
 
         .lines-empty{
@@ -92,6 +94,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
 
         paper-icon-button{
           padding: 2px;
+          margin: 5px
         }
         
       </style>
@@ -110,6 +113,8 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
                   show-line-group-info="[[showLineGroupInfo]]" 
                   show-line-production-status="[[showLineProductionStatus]]"
                   show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
+                  show-line-pack-mandatory="[[showLinePackMandatory]]"
+                  show-packs-reduced="[[showPacksReduced]]"
                   on-actions="_showLineActions" 
                   on-line-action-selected="_lineActionSelectedPrev" 
                   on-selected="_selectLine">
@@ -154,6 +159,8 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       showLineGroupInfo: Boolean,
       showLineProductionStatus: Boolean,
       showAmountsIncludingTaxes: Boolean,
+      showLinePackMandatory: Boolean,
+      showPacksReduced: Boolean,
       previewMode: Boolean,
       lines: {
         type: Array,
