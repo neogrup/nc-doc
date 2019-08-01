@@ -147,6 +147,20 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
           font-style: italic;
         }
 
+        .line-content-kitchen-prepared{
+          font-weight: bolder;
+          margin-left: 5px;
+          min-width: 15px;
+          color: #009688;
+        }
+
+        .line-content-kitchen-claimed{
+          font-weight: bolder;
+          margin-left: 5px;
+          min-width: 15px;
+          color: #F44336;
+        }
+
         .line-price {
           /* width: 90px; */
           padding: 0 5px 0 2px;
@@ -300,6 +314,11 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
               <template is="dom-if" if="{{showLinePackIncomplete}}">
                 <div class="line-content-icon"><iron-icon icon="av:fiber-manual-record"></iron-icon></div>
               </template>
+
+              <!-- <template is="dom-if" if="{{showLinePackIncomplete}}"> -->
+                <div class$="{{classNameContentKitchenClaimed}}">{{kitchenClaimed}}</div>
+              <!-- </template> -->
+
               <div class="line-price" hidden\$="{{_hidePrice(line)}}">[[lineAmount]]</div>
             </div>
 
@@ -428,6 +447,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     let lType = this.line.type || '';
     this.className = 'line';
     this.classNameContent = 'line-content';
+    this.kitchenClaimed = '';
+    this.classNameContentKitchenClaimed = '';
+
     this.showLine = true;
     this.showLinePackContent = false;
     this.showLinePackIncomplete = false;
@@ -479,6 +501,13 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
     this.classNameStatus = 'line-qty';
     if (this.line.kitchen){
+      if (this.line.kitchen.claimed === 'PREPARADO') {
+        this.classNameContentKitchenClaimed = 'line-content-kitchen-prepared';
+        this.kitchenClaimed = 'P';
+      } else if (this.line.kitchen.claimed === 'RECLAMADO') {
+        this.classNameContentKitchenClaimed = 'line-content-kitchen-claimed';
+        this.kitchenClaimed = 'R';
+      }
 
       let lStatus = this.line.kitchen.status || 'FI';
       
