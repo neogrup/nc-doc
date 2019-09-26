@@ -360,7 +360,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       lineActions: Array,
       showLineDeliveryOrder: {
         type: Boolean,
-        value: true,
+        value: false,
       },
       showLineGroupInfo: {
         type: Boolean,
