@@ -333,5 +333,9 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       this.shadowRoot.querySelector(slot)._animateLine()
     }
   }
+
+  _closeActions(){
+    this.shadowRoot.querySelector('#actions').close();
+  }
 }
 window.customElements.define('nc-doc-lines', NcDocLines);
