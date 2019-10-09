@@ -121,11 +121,21 @@ class NcDoc extends PolymerElement {
   }
 
   scrollLinesToBottom(){
-    this.shadowRoot.querySelector('nc-doc-lines')._scrollLinesToBottom();
+    if (this.shadowRoot.querySelector('nc-doc-lines')){
+      this.shadowRoot.querySelector('nc-doc-lines')._scrollLinesToBottom();
+    }
   }
 
   animateLine(lineId){
-    this.shadowRoot.querySelector('nc-doc-lines')._animateLine(lineId);
+    if (this.shadowRoot.querySelector('nc-doc-lines')){
+      this.shadowRoot.querySelector('nc-doc-lines')._animateLine(lineId);
+    }
+  }
+
+  closeActions(){
+    if (this.shadowRoot.querySelector('nc-doc-lines')){
+      this.shadowRoot.querySelector('nc-doc-lines')._closeActions();
+    }
   }
 }
 window.customElements.define('nc-doc', NcDoc);
