@@ -17,10 +17,18 @@
   },
   "ca":{
     "DOC_FOOTER_CHANGED_AMOUNT": "Canvi",
-    "DOC_FOOTER_DELIVERED_AMOUNT": "Entregat",
+    "DOC_FOOTER_DELIVERED_AMOUNT": "Lliurat",
     "DOC_FOOTER_TOTAL_AMOUNT": "Import",
     "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Sense canvi",
     "DOC_HEADER_EMPLOYEE": "Empleat",
     "DOC_LINES_NOT_LINES": "No s'ha afegit cap producte"
+  },
+  "fr":{
+    "DOC_FOOTER_CHANGED_AMOUNT": "Changement",
+    "DOC_FOOTER_DELIVERED_AMOUNT": "Livré",
+    "DOC_FOOTER_TOTAL_AMOUNT": "Montant",
+    "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Pas de changement",
+    "DOC_HEADER_EMPLOYEE": "Employé",
+    "DOC_LINES_NOT_LINES": "Aucun produit n'a été ajouté"
   }
 }
