@@ -149,6 +149,11 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       },
       deliveredProducts: Number,
       dataTicketLinesActions: Array,
+      editorMode: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
       lineActionsEnabled: Boolean,
       showNoLines: {
         type: Boolean,
@@ -223,6 +228,10 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
   }
 
   _showLineActions(element){
+    if (this.editorMode){
+      return;
+    }
+
     this._currentLine = element.target.line;
     this.shadowRoot.querySelector('#actions').positionTarget = element.detail;
     this.shadowRoot.querySelector('#actions').open();

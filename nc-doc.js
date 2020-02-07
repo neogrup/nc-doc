@@ -31,6 +31,7 @@ class NcDoc extends PolymerElement {
         <div id="doc-lines" style="height: 100%;overflow: auto;">
           <nc-doc-lines 
               language="{{language}}" 
+              editor-mode="[[editorMode]]"
               data="[[data.data.lines]]" 
               delivered-products="[[data.data.stats.deliveredProducts]]" 
               data-ticket-lines-actions="[[dataTicketLinesActions]]" 
@@ -65,6 +66,11 @@ class NcDoc extends PolymerElement {
       language: String,
       data: Object,
       dataTicketLinesActions: Array,
+      editorMode: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
       showDocHeader: {
         type: Boolean,
         value: false
