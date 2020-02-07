@@ -51,7 +51,7 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       </style>
 
       <paper-card>
-        <div class="header">
+        <div class="header" on-tap="_toggleTicketLinesScreen">
           <template is="dom-if" if="{{previewMode}}">
             <div class="order-id">#[[data.order]]</div>
             <div class="order-customer">[[customDesc]]</div>
@@ -101,6 +101,10 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
     } else {
       this.customDesc = this.localize('DOC_HEADER_EMPLOYEE') + ': ' +  this.data.attendedByName;
     }
+  }
+
+  _toggleTicketLinesScreen(){
+      this.dispatchEvent(new CustomEvent('toggleTicketLinesScreen', { bubbles: true, composed: true }));
   }
 }
 window.customElements.define('nc-doc-header', NcDocHeader);
