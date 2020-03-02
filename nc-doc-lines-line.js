@@ -433,10 +433,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
   _hidePrice(line) {
     let lAffectPrice = line.affectPrice || 'S';
-    let lPrintMode = line.printMode || 'print';
     let hidePrice = false;
 
-    if (lAffectPrice === 'N' || lPrintMode !== 'print'){
+    if (lAffectPrice === 'N'){
       hidePrice = true;
     }
     return hidePrice;
