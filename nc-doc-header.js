@@ -57,7 +57,7 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
             <div class="order-customer">[[customDesc]]</div>
           </template>
           <template is="dom-if" if="{{!previewMode}}">
-            <div class="order-id">#[[data.order]] - [[data.tariff.code]]</div>
+            <div class="order-id">#[[data.order]]</div>
             <div class="order-customer">[[data.buyerParty.name]]</div>
           </template>
 
