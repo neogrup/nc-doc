@@ -276,6 +276,9 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       case '_moveLine':
         this._moveLine();
         break;
+      case '_selectStartHour':
+        this._selectStartHour();
+        break;
     }
   }
 
@@ -328,6 +331,11 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
 
   _moveLine(){
     this.dispatchEvent(new CustomEvent('line-move', { detail: this._currentLine, bubbles: true, composed: true }));
+    this.shadowRoot.querySelector('#actions').close();
+  }
+
+  _selectStartHour(){
+    this.dispatchEvent(new CustomEvent('line-select-start-hour', { detail: this._currentLine, bubbles: true, composed: true }));
     this.shadowRoot.querySelector('#actions').close();
   }
 
