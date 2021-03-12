@@ -52,20 +52,6 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
           width: 100%;
         }
 
-        paper-dialog{
-          margin:  40px 30px;
-          padding: 0;
-        }
-
-
-        .line-dialog-actions {
-          /* @apply --layout-horizontal; */
-          /* @apply --layout-center; */
-          /* @apply --layout-vertical; */
-          width: 110px;
-
-        }
-
         .lines-empty{
           text-align: center;
           -webkit-touch-callout: none; /* iOS Safari */
@@ -115,7 +101,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
                   show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
                   show-line-pack-mandatory="[[showLinePackMandatory]]"
                   show-packs-reduced="[[showPacksReduced]]"
-                  on-actions="_showLineActions" 
+                  on-open-line-actions="_openLineActions"
                   on-line-action-selected="_lineActionSelectedPrev" 
                   on-selected="_selectLine">
               </nc-doc-lines-line>
@@ -128,13 +114,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
         </div>
       </paper-card>
 
-      <paper-dialog id="actions" vertical-align="top" dynamic-align>
-        <div class="line-dialog-actions">
-          <template is="dom-repeat" items="{{dataTicketLinesActions}}">
-            <paper-icon-button icon="[[item.icon]]" class\$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
-          </template>
-        </div>
-      </paper-dialog>
+      
     `;
   }
 
@@ -227,18 +207,18 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
     this.dispatchEvent(new CustomEvent('line-selected', { detail: this._currentLine, bubbles: true, composed: true }));
   }
 
-  _showLineActions(element){
+  _openLineActions(element){
     if (this.editorMode){
       return;
     }
-
     this._currentLine = element.target.line;
-    this.shadowRoot.querySelector('#actions').positionTarget = element.detail;
-    this.shadowRoot.querySelector('#actions').open();
+    this.dispatchEvent(new CustomEvent('open-doc-lines-line-actions', { detail: element.detail, bubbles: true, composed: true }));
   }
 
   _lineActionSelectedPrev(element){
-    this._currentLine = element.target.line;
+    if (element.target.line){
+      this._currentLine = element.target.line;
+    }
     this._lineActionSelected(element)
   }
 
@@ -288,55 +268,54 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
 
   _removeQty(){
     this.dispatchEvent(new CustomEvent('line-dec', { detail: this._currentLine, bubbles: true, composed: true }));
-
     if (this._currentLine.format.qty <= 0) {
-      this.shadowRoot.querySelector('#actions').close();
+      this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
     }
   }
 
   _selectQty(){
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
     this.dispatchEvent(new CustomEvent('line-select-qty', { detail: this._currentLine, bubbles: true, composed: true }));
   }
 
   _selectName(){
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
     this.dispatchEvent(new CustomEvent('line-select-name', { detail: this._currentLine, bubbles: true, composed: true }));
   }
 
   _selectPrice(){
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
     this.dispatchEvent(new CustomEvent('line-select-price', { detail: this._currentLine, bubbles: true, composed: true }));
   }
 
   _selectComments(){
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
     this.dispatchEvent(new CustomEvent('line-select-comments', { detail: this._currentLine, bubbles: true, composed: true }));
   }
 
   _selectDeliveryOrder(){
     this.dispatchEvent(new CustomEvent('line-select-delivery-order', { detail: this._currentLine, bubbles: true, composed: true }));
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
   }
 
   _delete(){
     this.dispatchEvent(new CustomEvent('line-del', { detail: this._currentLine, bubbles: true, composed: true }));
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
   }
 
   _showInfo(){
     this.dispatchEvent(new CustomEvent('line-show-info', { detail: this._currentLine, bubbles: true, composed: true }));
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
   }
 
   _moveLine(){
     this.dispatchEvent(new CustomEvent('line-move', { detail: this._currentLine, bubbles: true, composed: true }));
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
   }
 
   _selectStartHour(){
     this.dispatchEvent(new CustomEvent('line-select-start-hour', { detail: this._currentLine, bubbles: true, composed: true }));
-    this.shadowRoot.querySelector('#actions').close();
+    this.dispatchEvent(new CustomEvent('close-doc-lines-line-actions', {bubbles: true, composed: true }));
   }
 
   _scrollLinesToBottom(){
@@ -349,10 +328,6 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
     if (this.shadowRoot.querySelector(slot)){
       this.shadowRoot.querySelector(slot)._animateLine()
     }
-  }
-
-  _closeActions(){
-    this.shadowRoot.querySelector('#actions').close();
   }
 }
 window.customElements.define('nc-doc-lines', NcDocLines);

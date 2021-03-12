@@ -60,6 +60,29 @@ Copyright (c) 2017 Neo
             :host{
               --app-accent-color: #FF9800;
             }
+
+            paper-dialog{
+              margin:  30px 30px;
+              padding: 0;
+            }
+
+            .line-dialog-actions {
+              width: 110px;
+            }
+
+            paper-icon-button{
+              padding: 2px;
+              margin: 5px
+            }
+
+            .green{
+              color: #388E3C;
+            }
+
+            .red{
+              color: #D32F2F;
+            }
+
           </style>
 
           <iron-ajax
@@ -84,11 +107,22 @@ Copyright (c) 2017 Neo
                 show-line-delivery-order
                 show-line-production-info
                 show-amounts-including-taxes
+                on-open-doc-lines-line-actions="_openDocLinesLineActions"
+                on-close-doc-lines-line-actions="_closeDocLinesLineActions"
+                on-line-selected="_lineSelected"
                 on-line-inc="_lineInc"
                 on-line-dec="_lineDec"
                 on-line-del="_lineDel">
             </nc-doc>
           </div>
+
+          <paper-dialog id="docLinesLineActions" vertical-align="top" dynamic-align>
+            <div class="line-dialog-actions">
+              <template is="dom-repeat" items="{{dataTicketLinesActions}}">
+                <paper-icon-button icon="[[item.icon]]" class\$="[[_getDocLinesLineActionClass(item)]]" on-tap="_docLineslineActionSelected"></paper-icon-button>
+              </template>
+            </div>
+          </paper-dialog>
         `;
       }
 
@@ -126,6 +160,35 @@ Copyright (c) 2017 Neo
         ]
       }
 
+      _openDocLinesLineActions(element){
+          this.shadowRoot.querySelector('#docLinesLineActions').positionTarget = element.detail;
+          this.shadowRoot.querySelector('#docLinesLineActions').open();
+        }
+
+        _scrollDocLinesToBottom(){
+          if (this.shadowRoot.querySelector('nc-doc')){
+            this._scrollDocDebouncer = Debouncer.debounce(this._scrollDocDebouncer,
+              timeOut.after(100),
+              () => this.shadowRoot.querySelector('nc-doc').scrollLinesToBottom()
+            );
+            this.scrollToBottom = false;
+          }
+        }
+
+        _closeDocLinesLineActions(){
+          this.shadowRoot.querySelector('#docLinesLineActions').close();
+        }
+
+        _docLineslineActionSelected(element){
+          if (this.shadowRoot.querySelector('nc-doc')){
+            this.shadowRoot.querySelector('nc-doc').lineActionSelectedPrev(element);
+          }
+        }
+
+        _lineSelected(e){
+          console.log('_line selected!')
+        }
+
       _lineInc(currentLine){
         console.log('line inc!')
         console.log(currentLine.detail);
@@ -139,6 +202,23 @@ Copyright (c) 2017 Neo
       _lineDel(currentLine){
         console.log('line del!')
         console.log(currentLine.detail);
+      }
+
+      _getDocLinesLineActionClass(element){
+        let className = '';
+        let lineAction = element.action;
+
+        switch (lineAction) {
+          case '_addQty':
+            className = 'green';
+            break;
+          case '_removeQty':
+          case '_delete':
+            className = 'red';
+            break;
+        }
+
+        return className;
       }
     }
     window.customElements.define('demo-nc-doc-pos', DemoNcDocPos);
