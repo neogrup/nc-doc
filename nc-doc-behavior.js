@@ -96,5 +96,6 @@ let ncDocBehavior = (base) =>
 
       return className;
     }
+
   };
   export const MixinDoc = dedupingMixin(ncDocBehavior);

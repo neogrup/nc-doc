@@ -325,7 +325,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
             <template is="dom-if" if="{{lineActionsEnabled}}">
               <div class="line-actions">
                 <template is="dom-if" if="{{showLinesActionsDialog}}">
-                  <paper-icon-button icon="more-vert" on-tap="_showLineActions"></paper-icon-button>
+                  <paper-icon-button icon="more-vert" on-tap="_openLineActions"></paper-icon-button>
                 </template>
 
                 <template is="dom-if" if="{{!showLinesActionsDialog}}">
@@ -410,8 +410,8 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     this.dispatchEvent(new CustomEvent('selected', { detail: e.target, bubbles: true, composed: true }));
   }
 
-  _showLineActions(e){
-    this.dispatchEvent(new CustomEvent('actions', { detail: e.target, bubbles: true, composed: true }));
+  _openLineActions(e){
+    this.dispatchEvent(new CustomEvent('open-line-actions', { detail: e.target, bubbles: true, composed: true }));
   }
 
   _animateLine(){
@@ -421,7 +421,6 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     }
   }
   
-
   _getPackContentListItemClass(itemIndex){
     let className = 'line-content-packs-even';
     if (itemIndex % 2 != 0){
@@ -429,7 +428,6 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     }
     return className;
   }
-
 
   _hidePrice(line) {
     let lAffectPrice = line.affectPrice || 'S';
@@ -441,7 +439,6 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     return hidePrice;
   }
   
-
   _lineChanged(){
     let lType = this.line.type || '';
     this.className = 'line';

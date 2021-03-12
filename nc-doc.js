@@ -138,9 +138,9 @@ class NcDoc extends PolymerElement {
     }
   }
 
-  closeActions(){
+  lineActionSelectedPrev(element){
     if (this.shadowRoot.querySelector('nc-doc-lines')){
-      this.shadowRoot.querySelector('nc-doc-lines')._closeActions();
+      this.shadowRoot.querySelector('nc-doc-lines')._lineActionSelectedPrev(element);
     }
   }
 }
