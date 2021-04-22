@@ -19,6 +19,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
           -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
+          --line-content-type-icon-dimension: 20px;
         }
 
         .line-production-container{
@@ -96,12 +97,78 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
         .line-content{
           @apply --layout-flex;
-          padding-left: 10px;
+          /* padding: 0 2px; */
+        }
+
+        .line-content-level-0{
+          padding-left: 20px;
+        }
+        
+        .line-content-level-0-modifiers{
+          padding-left: 0px;
+        }
+
+        .line-content-level-1{
+          padding-left: 40px;
+        }
+
+        .line-content-level-1-modifiers{
+          padding-left: 20px;
+        }
+        
+        .line-content-level-2{
+          padding-left: 60px;
+        }
+
+        .line-content-level-2-modifiers{
+          padding-left: 40px;
+        }
+
+        .line-content-level-3{
+          padding-left: 80px;
+        }
+
+        .line-content-level-3-modifiers{
+          padding-left: 60px;
+        }
+
+        .line-content-level-4{
+          padding-left: 100px;
+        }
+
+        .line-content-level-4-modifiers{
+          padding-left: 80px;
+        }
+
+        .line-content-level-5{
+          padding-left: 120px;
+        }
+
+        .line-content-level-5-modifiers{
+          padding-left: 100px;
+        }
+
+        .line-content-level-6{
+          padding-left: 140px;
+        }
+
+        .line-content-level-6-modifiers{
+          padding-left: 120px;
+        }
+
+        .line-type-pack{
+          background-color: #26A69A;
+          border-radius: 5px;
+          color: white;
+          padding: 0 2px;
+          display: table;
         }
 
         .line-type-pack-line{
-          padding-left: 20px;
-          color: #26A69A;
+          /* color: #26A69A; */
+          /* color: #616161; */
+          color: #757575;
+          font-size: 0.9em;
         }
 
         .line-content-icon {
@@ -110,8 +177,26 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
         .line-content-icon > iron-icon{
           width: 12px;
+          height: 12px;
           color: var(--error-color);
+        }
 
+        .line-content-type-icon {
+          /* padding: 0px 1px; */
+        }
+
+        .line-content-type-icon > div{
+          width: 20px;
+          height: 20px;
+          color: #9E9E9E;
+          text-align: center;
+        }
+        
+
+        .line-content-type-icon > div > iron-icon{
+          width: var(--line-content-type-icon-dimension);
+          height: var(--line-content-type-icon-dimension);
+          /* color: #9E9E9E; */
         }
 
         .line-content-name {
@@ -296,8 +381,12 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
               </template>
               <div class\$="{{classNameStatus}}">[[line.format.qty]]</div>
               
+              <div class\$="{{classNameIndentation}}">
+                <div hidden\$="{{!showLineTypeIcon}}"><iron-icon icon\$="{{lineTypeIcon}}" ></iron-icon></div>
+              </div>
+
               <div class\$="{{classNameContent}}">
-                <div class="line-content-name">[[line.product.name]]</div>
+                <div class\$="{{classNameContentName}}">[[line.product.name]]</div>
                 <div class="line-content-format">[[line.format.name]]</div>
                 <div class="line-content-comments">[[line.comments.private]]</div>
                 <template is="dom-if" if="{{showLinePackContent}}">
@@ -311,6 +400,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
                   <div class="line-content-discount">[[item.name]]</div>
                 </template>
               </div>
+
+
+
               <template is="dom-if" if="{{showLinePackIncomplete}}">
                 <div class="line-content-icon"><iron-icon icon="av:fiber-manual-record"></iron-icon></div>
               </template>
@@ -319,7 +411,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
                 <div class$="{{classNameContentKitchenClaimed}}">{{kitchenClaimed}}</div>
               <!-- </template> -->
 
-              <div class="line-price" hidden\$="{{_hidePrice(line)}}">[[lineAmount]]</div>
+              <div class="line-price" hidden\$="{{hidePrice}}">[[lineAmount]]</div>
             </div>
 
             <template is="dom-if" if="{{lineActionsEnabled}}">
@@ -381,7 +473,12 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       showPacksReduced: {
         type: Boolean,
         value: false,
+      },
+      hidePrice: {
+        type: Boolean,
+        value: false,
       }
+      
     }
   }
 
@@ -429,26 +526,24 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     return className;
   }
 
-  _hidePrice(line) {
-    let lAffectPrice = line.affectPrice || 'S';
-    let hidePrice = false;
-
-    if (lAffectPrice === 'N'){
-      hidePrice = true;
-    }
-    return hidePrice;
-  }
   
   _lineChanged(){
     let lType = this.line.type || '';
+    let lModifiers = this.line.modifiers || 'N';
+    let lLevel = this.line.level || 0;
     this.className = 'line';
     this.classNameContent = 'line-content';
+    this.classNameContentName = 'line-content-name';
+    this.classNameIndentation = 'line-content-type-icon'
     this.kitchenClaimed = '';
     this.classNameContentKitchenClaimed = '';
 
     this.showLine = true;
     this.showLinePackContent = false;
     this.showLinePackIncomplete = false;
+    this.showLineTypeIcon = false;
+    this.lineTypeIcon = ''
+    this.lineTypeIconDimension = '20px';
     this.packContentList = [];
 
     this.lineAmount = '';
@@ -461,39 +556,129 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       amount = (this.line.packNetAmount) ? this.line.packNetAmount : this.line.netAmount;
     }
 
-    switch (lType) {
-      case 'pack':
-        if (this.showPacksReduced){
-          this.showLinePackContent = true;
 
-          if (this.line.packTotalAmount){
-            amount = this.line.packTotalAmount;
-          }
+    if (lModifiers === 'S'){
+      if (this.showPacksReduced){
+        this.showLinePackContent = true;
 
-        }
-        if (this.line.packCompleted == 'N'){
-          this.showLinePackIncomplete = true;
+        if (this.line.packTotalAmount){
+          amount = this.line.packTotalAmount;
         }
 
-        if (this.line.comments.packContent){
-          this.packContentList = this.line.comments.packContent.split('|');
+      }
+      if (this.line.packCompleted == 'N'){
+        this.showLinePackIncomplete = true;
+      }
+
+      if (this.line.comments.packContent){
+        this.packContentList = this.line.comments.packContent.split('|');
+      }
+
+      if (lLevel == 0){
+        this.classNameContentName = this.classNameContentName + ' line-type-pack';
+      }
+
+      this.showLineTypeIcon = true;
+      let usedQty = 0;
+      if (this.line.packOptions){
+        this.line.packOptions.forEach(packOption => {
+          usedQty += packOption.used
+        });
+      }
+      if (usedQty > 0) {
+        this.lineTypeIcon = 'expand-more';
+      } else {
+        this.lineTypeIcon = 'chevron-right';
+      }
+    
+    
+    } else if ((lType !== 'packLine') && (lLevel > 0)){
+      if ((!this.showLinePackMandatory) && (this.line.mandatory === 'S')){
+        this.showLine = false;
+      }
+
+      if (this.showPacksReduced){
+        this.showLine = false;
+      }
+
+      this.showLineTypeIcon = true;
+      this.lineTypeIcon = 'icons:radio-button-unchecked';
+      this.lineTypeIconDimension = '14px';
+      
+    } else if (lType === 'pack'){
+      if (this.showPacksReduced){
+        this.showLinePackContent = true;
+
+        if (this.line.packTotalAmount){
+          amount = this.line.packTotalAmount;
         }
 
-        break;
-      case 'packLine':
-        if ((!this.showLinePackMandatory) && (this.line.mandatory === 'S')){
-          this.showLine = false;
-        }
+      }
+      if (this.line.packCompleted == 'N'){
+        this.showLinePackIncomplete = true;
+      }
 
-        if (this.showPacksReduced){
-          this.showLine = false;
-        }
-        this.classNameContent = this.classNameContent + ' line-type-pack-line';
-        break;
+      if (this.line.comments.packContent){
+        this.packContentList = this.line.comments.packContent.split('|');
+      }
+
+      this.classNameContentName = this.classNameContentName + ' line-type-pack';
+      this.showLineTypeIcon = true;
+      let usedQty = 0;
+      if (this.line.packOptions){
+        this.line.packOptions.forEach(packOption => {
+          usedQty += packOption.used
+        });
+      }
+      if (usedQty > 0) {
+        this.lineTypeIcon = 'expand-more';
+      } else {
+        this.lineTypeIcon = 'chevron-right';
+      }
+
+    } else if (lType === 'packLine'){
+      if ((!this.showLinePackMandatory) && (this.line.mandatory === 'S')){
+        this.showLine = false;
+      }
+
+      if (this.showPacksReduced){
+        this.showLine = false;
+      }
+
+      this.showLineTypeIcon = true;
+      this.lineTypeIcon = 'icons:radio-button-unchecked';
+      this.lineTypeIconDimension = '14px';
+    } 
+
+    if (lLevel > 0) this.classNameContent = this.classNameContent + ' line-type-pack-line';
+    if (this.showPacksReduced){
+      this.lineTypeIcon = 'chevron-right';
     }
 
+    this.updateStyles({
+      '--line-content-type-icon-dimension': this.lineTypeIconDimension
+    });
+
+
+      if (this.showLineTypeIcon){
+      this.classNameIndentation = this.classNameIndentation + ' line-content-level-' + lLevel + '-modifiers';
+    } else {
+      this.classNameIndentation = this.classNameIndentation + ' line-content-level-' + lLevel;
+    }
 
     this.lineAmount = this._formatPrice(amount);
+
+    let lAffectPrice = this.line.affectPrice || 'S';
+
+    if (lAffectPrice === 'N'){
+      if ((this.line.modifiers == "S") && (this.line.packTotalAmount > 0) && (this.showPacksReduced)){
+        this.hidePrice = false;
+      } else {
+        this.hidePrice = true;
+      }
+    } else {
+      this.hidePrice = false;
+    }
 
     this.classNameStatus = 'line-qty';
     if (this.line.kitchen){
