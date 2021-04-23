@@ -563,6 +563,8 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
         if (this.line.packTotalAmount){
           amount = this.line.packTotalAmount;
+        } else {
+          amount = 0;
         }
 
       }
@@ -671,13 +673,17 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     let lAffectPrice = this.line.affectPrice || 'S';
 
     if (lAffectPrice === 'N'){
-      if ((this.line.modifiers == "S") && (this.line.packTotalAmount > 0) && (this.showPacksReduced)){
+      if ((this.line.modifiers == "S") && ((this.line.packTotalAmount) && (this.line.packTotalAmount > 0)) && (this.showPacksReduced)){
         this.hidePrice = false;
       } else {
         this.hidePrice = true;
       }
     } else {
-      this.hidePrice = false;
+      if ((this.line.modifiers == "S") && ((!this.line.packTotalAmount) || (this.line.packTotalAmount == 0)) && (this.showPacksReduced)){
+        this.hidePrice = true;
+      } else{
+        this.hidePrice = false;
+      }
     }
 
     this.classNameStatus = 'line-qty';
