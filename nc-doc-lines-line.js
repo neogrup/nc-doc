@@ -572,7 +572,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         this.showLinePackIncomplete = true;
       }
 
-      if (this.line.comments.packContent){
+      if ((this.line.comments) && (this.line.comments.packContent)){
         this.packContentList = this.line.comments.packContent.split('|');
       }
 
@@ -620,7 +620,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         this.showLinePackIncomplete = true;
       }
 
-      if (this.line.comments.packContent){
+      if ((this.line.comments) && (this.line.comments.packContent)){
         this.packContentList = this.line.comments.packContent.split('|');
       }
 
