@@ -94,6 +94,10 @@ let ncDocBehavior = (base) =>
           break;
       }
 
+      if (this.hideLineActionsMultiLevel){
+        if (this.line.level > 0 ) className = 'transparent';
+      }
+
       return className;
     }
 

@@ -94,6 +94,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
                   language="{{language}}" 
                   line="{{line}}" 
                   line-actions-enabled="[[lineActionsEnabled]]" 
+                  hide-line-actions-multi-level="[[hideLineActionsMultiLevel]]"
                   line-actions="[[dataTicketLinesActions]]" 
                   show-line-delivery-order="[[showLineDeliveryOrder]]" 
                   show-line-group-info="[[showLineGroupInfo]]" 
@@ -101,6 +102,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
                   show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
                   show-line-pack-mandatory="[[showLinePackMandatory]]"
                   show-packs-reduced="[[showPacksReduced]]"
+                  hide-packs-multi-level="[[hidePacksMultiLevel]]"
                   on-open-line-actions="_openLineActions"
                   on-line-action-selected="_lineActionSelectedPrev" 
                   on-selected="_selectLine">
@@ -135,6 +137,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
         notify: true
       },
       lineActionsEnabled: Boolean,
+      hideLineActionsMultiLevel: Boolean,
       showNoLines: {
         type: Boolean,
         value: true
@@ -146,6 +149,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
       showAmountsIncludingTaxes: Boolean,
       showLinePackMandatory: Boolean,
       showPacksReduced: Boolean,
+      hidePacksMultiLevel: Boolean,
       previewMode: Boolean,
       lines: {
         type: Array,
@@ -197,6 +201,10 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
 
     if (!this.showCanceledLines){
       if ((line.status === "canceled") || (line.status === "discard")) showLine = false;
+    }
+
+    if (this.hidePacksMultiLevel){
+      if (line.level > 0 ) showLine = false;
     }
 
     return showLine;

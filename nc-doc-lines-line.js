@@ -161,6 +161,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
           border-radius: 5px;
           color: white;
           padding: 0 2px;
+          margin: 2px 0;
           display: table;
         }
 
@@ -189,7 +190,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
           width: 20px;
           height: 20px;
           color: #9E9E9E;
-          text-align: center;
+          @apply --layout-horizontal;
+          @apply --layout-center;
+          @apply --layout-center-justified;
         }
         
 
@@ -256,6 +259,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
           /* font-size: 1em; */
         }
 
+        .transparent{
+          visibility: hidden;
+        }
 
         .green{
           color: #388E3C;
@@ -445,6 +451,10 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         type: Boolean,
         value: false
       },
+      hideLineActionsMultiLevel: {
+        type: Boolean,
+        value: false
+      },
       showLinesActionsDialog: {
         type: Boolean,
         value: false
@@ -474,6 +484,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         type: Boolean,
         value: false,
       },
+      hidePacksMultiLevel: Boolean,
       hidePrice: {
         type: Boolean,
         value: false,
@@ -525,7 +536,6 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     }
     return className;
   }
-
   
   _lineChanged(){
     let lType = this.line.type || '';
@@ -537,6 +547,12 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     this.classNameIndentation = 'line-content-type-icon'
     this.kitchenClaimed = '';
     this.classNameContentKitchenClaimed = '';
+
+    this.hideLineActionsButton = false;
+
+    if (this.hideLineActionsMultiLevel){
+      if (this.line.level > 0 ) this.hideLineActionsButton = true;
+    }
 
     this.showLine = true;
     this.showLinePackContent = false;
@@ -572,8 +588,16 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         this.showLinePackIncomplete = true;
       }
 
-      if ((this.line.comments) && (this.line.comments.packContent)){
-        this.packContentList = this.line.comments.packContent.split('|');
+      if (this.line.comments){
+        if (this.hidePacksMultiLevel) { 
+          if (this.line.comments.packContentComplete){ 
+            this.packContentList = this.line.comments.packContentComplete.split('|');
+          }
+        } else {
+          if (this.line.comments.packContent){
+            this.packContentList = this.line.comments.packContent.split('|');
+          }
+        }
       }
 
       if (lLevel == 0){
@@ -620,8 +644,16 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         this.showLinePackIncomplete = true;
       }
 
-      if ((this.line.comments) && (this.line.comments.packContent)){
-        this.packContentList = this.line.comments.packContent.split('|');
+      if (this.line.comments){
+        if (this.hidePacksMultiLevel) { 
+          if (this.line.comments.packContentComplete){ 
+            this.packContentList = this.line.comments.packContentComplete.split('|');
+          }
+        } else {
+          if (this.line.comments.packContent){
+            this.packContentList = this.line.comments.packContent.split('|');
+          }
+        }
       }
 
       this.classNameContentName = this.classNameContentName + ' line-type-pack';
@@ -662,7 +694,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
     });
 
 
-      if (this.showLineTypeIcon){
+    if (this.showLineTypeIcon){
       this.classNameIndentation = this.classNameIndentation + ' line-content-level-' + lLevel + '-modifiers';
     } else {
       this.classNameIndentation = this.classNameIndentation + ' line-content-level-' + lLevel;
