@@ -38,12 +38,14 @@ class NcDoc extends PolymerElement {
               preview-mode="[[previewMode]]" 
               show-canceled-lines="[[showCanceledLines]]" 
               line-actions-enabled="[[lineActionsEnabled]]" 
+              hide-line-actions-multi-level="[[hideLineActionsMultiLevel]]"
               show-line-delivery-order="[[showLineDeliveryOrder]]" 
               show-line-group-info="[[showLineGroupInfo]]" 
               show-line-production-status="[[showLineProductionStatus]]"
               show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
               show-line-pack-mandatory="[[showLinePackMandatory]]"
-              show-packs-reduced="[[showPacksReduced]]">
+              show-packs-reduced="[[showPacksReduced]]"
+              hide-packs-multi-level="[[hidePacksMultiLevel]]">
           </nc-doc-lines>
         </div>
       </template>
@@ -87,6 +89,10 @@ class NcDoc extends PolymerElement {
         type: Boolean,
         value: false
       },
+      hideLineActionsMultiLevel: {
+        type: Boolean,
+        value: false
+      },
       showLineDeliveryOrder: {
         type: Boolean,
         value: false
@@ -122,7 +128,11 @@ class NcDoc extends PolymerElement {
       showPacksReduced: {
         type: Boolean,
         value: false
-      }
+      },
+      hidePacksMultiLevel: {
+        type: Boolean,
+        value: false
+      },
     }
   }
 
