@@ -388,7 +388,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
               <div class\$="{{classNameStatus}}">[[line.format.qty]]</div>
               
               <div class\$="{{classNameIndentation}}">
-                <div hidden\$="{{!showLineTypeIcon}}"><iron-icon icon\$="{{lineTypeIcon}}" ></iron-icon></div>
+                <template is="dom-if" if="{{showLineTypeIcon}}">
+                  <div><iron-icon icon\$="{{lineTypeIcon}}" ></iron-icon></div>
+                </template>
               </div>
 
               <div class\$="{{classNameContent}}">
