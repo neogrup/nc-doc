@@ -83,7 +83,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         }
 
         .line-qty {
-          width: 40px;
+          width: 45px;
           text-align: center;
         }
 
