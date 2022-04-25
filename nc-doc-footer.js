@@ -116,6 +116,10 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       showAmountsIncludingTaxes: {
         type: Boolean,
         value: false
+      },
+      hideChangeAndDeliveredAmount: {
+        type: Boolean,
+        value: false
       }
     }
   }
@@ -134,12 +138,16 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
   _dataChanged() {
     if (!this.data) return;
     if (this.data.fiscal) {
-      this.totalAmount = this.data.fiscal.totals.totalAmount; 
+      if (this.showAmountsIncludingTaxes){
+        this.totalAmount = this.data.fiscal.totals.totalAmount; 
+      } else {
+        this.totalAmount = this.data.fiscal.totals.netAmount;
+      }
 
       this.totalDeliveredAmount = (this.data.fiscal.totals.deliveredAmount) ? this.data.fiscal.totals.deliveredAmount : 0; 
       this.totalChangeAmount = (this.data.fiscal.totals.changeAmount) ? this.data.fiscal.totals.changeAmount : 0; 
 
-      if (this.data.status === 'closed'){
+      if ((this.data.status === 'closed') && (!this.hideChangeAndDeliveredAmount)){
         this.showChange = true;
         if (this.showChangeInDialog){
           this.messageDialog = (this.totalChangeAmount === 0) ? this.localize('DOC_FOOTER_WITHOUT_CHANGED_AMOUNT') : this.localize('DOC_FOOTER_CHANGED_AMOUNT') + ': ' + this._formatPrice(this.totalChangeAmount);
