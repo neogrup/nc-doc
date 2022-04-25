@@ -56,7 +56,8 @@ class NcDoc extends PolymerElement {
               language="{{language}}" 
               data="[[data.data]]" 
               show-change-in-dialog="[[showChangeInDialog]]"
-              show-amounts-including-taxes="[[showAmountsIncludingTaxes]]">
+              show-amounts-including-taxes="[[showAmountsIncludingTaxes]]"
+              hide-change-and-delivered-amount="[[hideChangeAndDeliveredAmount]]">
           </nc-doc-footer>
         </div>
       </template>
@@ -133,6 +134,10 @@ class NcDoc extends PolymerElement {
         type: Boolean,
         value: false
       },
+      hideChangeAndDeliveredAmount: {
+        type: Boolean,
+        value: false
+      }
     }
   }
 
