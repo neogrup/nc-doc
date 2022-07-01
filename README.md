@@ -19,3 +19,8 @@ polymer serve
    [Documentation page](http://localhost:8000/components/nc-doc/)
 
 
+4. Publish
+
+```
+npm publish
+```
