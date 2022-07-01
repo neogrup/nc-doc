@@ -372,7 +372,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
       <template is="dom-if" if="{{showGroupInfo}}">
         <div class="line-production-container" >
-          <div class="line-production-content-time">[[_formatTime(line.kitchen.producedTime,language)]]</div>
+          <div class="line-production-content-time">[[_formatTimeNull(line.kitchen.producedTime,language)]]</div>
           <div class="line-production-content-user">[[line.agent]]</div>
         </div>
       </template>
@@ -773,7 +773,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         lGroup =  this.line.group;
       }
 
-      if ((this.showLineGroupInfo) && (this.line.kitchen.producedTime != '0001-01-01T00:00:00Z') && (lGroup === 'user,time')) {
+      if ((this.showLineGroupInfo) && (lGroup === 'user,time')) {
         this.showGroupInfo = true;
       }
     }

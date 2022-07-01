@@ -67,6 +67,18 @@ let ncDocBehavior = (base) =>
       return timeText;
     }
 
+    _formatTimeNull(time, language) {
+      let lLanguage = (language) ? language : 'es';
+      moment.locale(lLanguage);
+      let timeText = this._formatTime(time, language);
+
+      if ((moment(time).year() <= 1) && (timeText=="00:00h")) {
+        timeText = "--:--";
+      }
+
+      return timeText;
+    }
+    
     _languageChanged(){
       if (typeof(moment)!="undefined") {
         moment.locale(this.language);
