@@ -430,7 +430,9 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
 
                 <template is="dom-if" if="{{!showLinesActionsDialog}}">
                   <template is="dom-repeat" items="{{lineActions}}">
-                    <paper-icon-button icon="[[item.icon]]" class\$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
+                    <template is="dom-if" if="{{_canShowAction(line, item)}}">
+                      <paper-icon-button icon="[[item.icon]]" class\$="[[_getLineActionClass(item)]]" on-tap="_lineActionSelected"></paper-icon-button>
+                    </template>    
                   </template>
                 </template>
               </div>
@@ -510,6 +512,22 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
         this.showLinesActionsDialog = true;
       }
     }
+  }
+
+  _canShowAction(line, action) {
+    let show = true;
+    
+    if (action.action == '_delete') {
+      if (line.actions !== undefined){
+        if (line.actions.denyDelete !== undefined){
+          if (line.actions.denyDelete) {
+            show = false;
+          }
+        }
+      }
+    }
+
+    return show;
   }
 
   _lineActionSelected(e){
