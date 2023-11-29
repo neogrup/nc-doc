@@ -39,6 +39,7 @@
 			"documentNumber": "0000000",
 			"currency": {
 				"code": "EUR",
+				"symbol": "₣",
 				"decimals": 0,
 				"decimalsUnitPrice": 0,
 				"decimalsLineAmount": 0

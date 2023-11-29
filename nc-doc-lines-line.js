@@ -447,6 +447,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
   static get properties() {
     return {
       language: String,
+      symbol: String,
       line: {
         type: Object,
         value: {}
@@ -720,7 +721,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       this.classNameIndentation = this.classNameIndentation + ' line-content-level-' + lLevel;
     }
 
-    this.lineAmount = this._formatPrice(amount);
+    this.lineAmount = this._formatPriceCur(amount, this.symbol);
 
     let lAffectPrice = this.line.affectPrice || 'S';
 

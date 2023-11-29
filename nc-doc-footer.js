@@ -71,16 +71,16 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
           </template>
           <div class="line">
             <div class="label total-amount">{{localize('DOC_FOOTER_TOTAL_AMOUNT')}}</div>
-            <div class="value total-amount">[[_formatPrice(totalAmount)]]</div>
+            <div class="value total-amount">[[_formatPriceCur(totalAmount, data.fiscal.currency.symbol)]]</div>
           </div>
           <template is="dom-if" if="{{showChange}}">
             <div class="line">
               <div class="label">{{localize('DOC_FOOTER_DELIVERED_AMOUNT')}}</div>
-              <div class="value">[[_formatPrice(totalDeliveredAmount)]]</div>
+              <div class="value">[[_formatPriceCur(totalDeliveredAmount, data.fiscal.currency.symbol)]]</div>
             </div>
             <div class="line">
               <div class="label">{{localize('DOC_FOOTER_CHANGED_AMOUNT')}}</div>
-              <div class="value">[[_formatPrice(totalChangeAmount)]]</div>
+              <div class="value">[[_formatPriceCur(totalChangeAmount, data.fiscal.currency.symbol)]]</div>
             </div>
           </template>
         </div>
@@ -150,7 +150,7 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       if ((this.data.status === 'closed') && (!this.hideChangeAndDeliveredAmount)){
         this.showChange = true;
         if (this.showChangeInDialog){
-          this.messageDialog = (this.totalChangeAmount === 0) ? this.localize('DOC_FOOTER_WITHOUT_CHANGED_AMOUNT') : this.localize('DOC_FOOTER_CHANGED_AMOUNT') + ': ' + this._formatPrice(this.totalChangeAmount);
+          this.messageDialog = (this.totalChangeAmount === 0) ? this.localize('DOC_FOOTER_WITHOUT_CHANGED_AMOUNT') : this.localize('DOC_FOOTER_CHANGED_AMOUNT') + ': ' + this._formatPriceCur(this.totalChangeAmount, this.data.fiscal.currency.symbol);
           this.dispatchEvent(new CustomEvent('show-doc-change', {detail: this.messageDialog, bubbles: true, composed: true }));
         }
         
@@ -171,7 +171,7 @@ class NcDocFooter extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       amount = discount.discountAmount;
     }
     
-    return this._formatPrice(amount);
+    return this._formatPriceCur(amount, this.data.fiscal.currency.symbol);
   }
 }
 window.customElements.define('nc-doc-footer', NcDocFooter);

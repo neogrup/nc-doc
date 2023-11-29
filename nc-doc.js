@@ -33,6 +33,7 @@ class NcDoc extends PolymerElement {
               language="{{language}}" 
               editor-mode="[[editorMode]]"
               data="[[data.data.lines]]" 
+              symbol="[[data.data.fiscal.currency.symbol]]" 
               delivered-products="[[data.data.stats.deliveredProducts]]" 
               data-ticket-lines-actions="[[dataTicketLinesActions]]" 
               preview-mode="[[previewMode]]" 

@@ -92,6 +92,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
               <nc-doc-lines-line 
                   id="slot[[line.id]]" 
                   language="{{language}}" 
+                  symbol="[[symbol]]"
                   line="{{line}}" 
                   line-actions-enabled="[[lineActionsEnabled]]" 
                   hide-line-actions-multi-level="[[hideLineActionsMultiLevel]]"
@@ -124,6 +125,7 @@ class NcDocLines extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(PolymerE
   static get properties() {
     return {
       language: String,
+      symbol: String,
       data: {
         type: Object,
         value: {},
