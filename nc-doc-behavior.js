@@ -92,6 +92,14 @@ let ncDocBehavior = (base) =>
       return priceText;
     }
 
+    _formatPriceCur(price, symbol) {
+      let priceText = "";
+      let lPrice = (price) ? price : 0;
+      if (symbol == '' || (typeof symbol == "undefined")) symbol = '€';
+      priceText = formatMoney(lPrice, {symbol: symbol, precision: 2, thousand: ".", decimal: ",", format: "%v %s"});
+      return priceText;
+    }
+    
     _getLineActionClass(element){
       let className = '';
       let lineAction = element.action;
