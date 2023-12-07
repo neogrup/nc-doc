@@ -373,7 +373,7 @@ class NcDocLinesLine extends MixinDoc(PolymerElement) {
       <template is="dom-if" if="{{showGroupInfo}}">
         <div class="line-production-container" >
           <div class="line-production-content-time">[[_formatTimeNull(line.kitchen.producedTime,language)]]</div>
-          <div class="line-production-content-user">[[line.agent]]</div>
+          <div class="line-production-content-user">[[line.agentName]]</div>
         </div>
       </template>
 
