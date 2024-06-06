@@ -1,0 +1,200 @@
+{
+    "apiVersion": "1",
+    "systemTime": "2024-06-06T17:10:30.6247617+02:00",
+    "data": {
+        "version": "0.3",
+        "type": "ticket",
+        "subType": "CONPLN",
+        "subTypeExplain": "Venta planificada",
+        "order": "600028",
+        "date": "20240606",
+        "shopCode": "R002",
+        "status": "opened",
+        "statusExplain": "opened",
+        "sysData": {
+            "created": "2024-06-06T16:57:46Z",
+            "createdBy": "78968761D",
+            "edited": "2024-06-06T17:10:30.19Z",
+            "editedBy": "78968761D",
+            "editing": "0001-01-01T00:00:00Z",
+            "sent": "2024-06-06T17:10:29Z"
+        },
+        "buyerParty": {
+            "code": "00000",
+            "name": "Contado",
+            "postalAddress": {
+                "detail": "",
+                "city": "",
+                "postalCode": "",
+                "state": "",
+                "country": "",
+                "countryiso30661": ""
+            },
+            "loyalty": {},
+            "taxIdentification": {},
+            "contact": {},
+            "totalClients": 1
+        },
+        "fiscal": {
+            "currency": {
+                "code": "EUR",
+                "symbol": "€",
+                "decimals": 0,
+                "decimalsUnitPrice": 0,
+                "decimalsLineAmount": 0
+            },
+            "quantity": {
+                "decimals": 0
+            },
+            "priceWithTaxes": "S",
+            "taxes": [
+                {
+                    "id": "IVA",
+                    "ruleId": "IVA10",
+                    "rate": 10,
+                    "baseAmount": 1.82,
+                    "taxAmount": 0.18,
+                    "totalAmount": 2
+                }
+            ],
+            "totals": {
+                "grossAmount": 1.82,
+                "netAmount": 1.82,
+                "totalAmount": 2,
+                "pendingAmount": 2,
+                "subTotal": 2
+            },
+            "drawer": "R00401",
+            "closedTime": "0001-01-01T00:00:00Z",
+            "delivered": "N",
+            "deliveredTime": "0001-01-01T00:00:00Z",
+            "refundDoc": "0",
+            "refundType": "0",
+            "serviceDate": "0001-01-01T00:00:00Z",
+            "fiscalType": "GUIP"
+        },
+        "lines": [
+            {
+                "id": 1,
+                "product": {
+                    "id": "R00056",
+                    "name": "Café con leche NC_",
+                    "price": 2,
+                    "basePrice": 1.8182,
+                    "tariffPrice": 2
+                },
+                "qty": 1,
+                "unitOfMeasure": "UD",
+                "format": {
+                    "factor": 1,
+                    "qty": 1
+                },
+                "grossQty": 1,
+                "grossAmount": 1.82,
+                "netAmount": 1.8182,
+                "totalAmount": 2,
+                "taxRuleId": "IVA10",
+                "taxes": [
+                    {
+                        "id": "IVA",
+                        "ruleId": "IVA10",
+                        "rate": 10,
+                        "baseAmount": 1.8182,
+                        "taxAmount": 0.1818,
+                        "totalAmount": 2
+                    }
+                ],
+                "comments": {},
+                "status": "active",
+                "businessSource": "B",
+                "rule": "EPL",
+                "startTime": "2024-06-06T17:00:49.387Z",
+                "endTime": "0001-01-01T00:00:00Z",
+                "group": "user,time",
+                "kitchen": {
+                    "producedQty": 1,
+                    "producedTime": "2024-06-06T17:02:00Z",
+                    "status": "FI",
+                    "deliveryOrder": 6,
+                    "deliveryName": "Cafés",
+                    "noteGroup": ""
+                },
+                "sysData": {
+                    "created": "0001-01-01T00:00:00Z",
+                    "edited": "2024-06-06T17:00:49.387Z",
+                    "editing": "0001-01-01T00:00:00Z",
+                    "sent": "0001-01-01T00:00:00Z"
+                },
+                "affectPrice": "S",
+                "agent": "78968761D",
+                "agentName": "ACS"
+            }
+        ],
+        "operator": "78968761D",
+        "attendedBy": "78968761D",
+        "attendedByName": "ACS",
+        "location": {
+            "zone": "R002BAR",
+            "zoneName": "Barra",
+            "spot": "10",
+            "spotName": "Mesa 10"
+        },
+        "tariff": {
+            "code": "R001",
+            "date": "20240606"
+        },
+        "owner": "Z01",
+        "lock": {
+            "owner": "Z01",
+            "status": "CU",
+            "time": "2024-06-06T17:10:30.19Z"
+        },
+        "lastModifiedLine": 0,
+        "stats": {
+            "printProformaCount": 0,
+            "printInvoiceCount": 0,
+            "deliveredProducts": 1,
+            "soldProducts": 1,
+            "producedProductsPF": 0,
+            "noProforma": "N"
+        },
+        "properties": [
+            {
+                "name": "CustomerLanguage",
+                "value": "es"
+            },
+            {
+                "name": "docType",
+                "value": "DOC_TYPE_GENERIC"
+            },
+            {
+                "name": "docTypeCharge",
+                "value": "S"
+            },
+            {
+                "name": "HORAOLD",
+                "value": "170209"
+            },
+            {
+                "name": "IDOrder",
+                "value": "P028"
+            },
+            {
+                "name": "PUESTOOLD",
+                "value": "01"
+            },
+            {
+                "name": "ZONAOLD",
+                "value": "R002BAR"
+            }
+        ],
+        "production": {
+            "printed": "S",
+            "pager": {
+                "id": "",
+                "assignTime": "0001-01-01T00:00:00Z"
+            }
+        }
+    },
+    "error": null
+}

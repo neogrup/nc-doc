@@ -52,12 +52,17 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
 
       <paper-card>
         <div class="header" on-tap="_toggleTicketLinesScreen">
+          <template is="dom-if" if="{{showTypeOnHeader}}">
+              <div class="order-id">[[data.subTypeExplain]]</div>
+          </template>
+          <template is="dom-if" if="{{!showTypeOnHeader}}">
+            <div class="order-id">#[[data.order]]</div>           
+          </template>  
+
           <template is="dom-if" if="{{previewMode}}">
-            <div class="order-id">#[[data.order]]</div>
             <div class="order-customer">[[customDesc]]</div>
           </template>
           <template is="dom-if" if="{{!previewMode}}">
-            <div class="order-id">#[[data.order]]</div>
             <div class="order-customer">[[data.buyerParty.name]]</div>
           </template>
 
@@ -100,6 +105,16 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
       }
     } else {
       this.customDesc = this.localize('DOC_HEADER_EMPLOYEE') + ': ' +  this.data.attendedByName;
+    }
+
+    this.showTypeOnHeader = false;
+    if (this.showTypeHeader) {
+      if (this.data.properties){
+        let docType = this.data.properties.find(property => property.name === "docType");
+        if (docType) {
+          this.showTypeOnHeader = true;
+        }
+      }
     }
   }
 

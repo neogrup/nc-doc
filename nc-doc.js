@@ -22,6 +22,7 @@ class NcDoc extends PolymerElement {
           <nc-doc-header
               language="{{language}}" 
               data="[[data.data]]" 
+              show-type-header="[[showTypeHeader]]"
               preview-mode="[[previewMode]]">
           </nc-doc-header>
         </div>
@@ -104,6 +105,10 @@ class NcDoc extends PolymerElement {
         value: false
       },
       showLineProductionStatus: {
+        type: Boolean,
+        value: false
+      },
+      showTypeHeader: {
         type: Boolean,
         value: false
       },

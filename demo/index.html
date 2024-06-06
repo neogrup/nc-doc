@@ -88,7 +88,8 @@ Copyright (c) 2017 Neo
           <iron-ajax
               auto
               id="getDoc"
-              url="data/pos.json"
+              _url="data/pos.json"
+              url="data/pos-subtype.json"
               method="get"
               handle-as="json"
               last-response="{{dataDoc}}">
@@ -99,6 +100,7 @@ Copyright (c) 2017 Neo
                 id="doc"
                 data="[[dataDoc]]"
                 language="es"
+                show-type-header
                 show-doc-header
                 show-doc-lines
                 show-doc-footer
