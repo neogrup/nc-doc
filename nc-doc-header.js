@@ -102,6 +102,8 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
     if (this.data.buyerParty.loyalty){
       if (this.data.buyerParty.loyalty.account){
         this.customDesc = this.data.buyerParty.name;
+      } else {
+        this.customDesc = this.localize('DOC_HEADER_EMPLOYEE') + ': ' +  this.data.attendedByName;  
       }
     } else {
       this.customDesc = this.localize('DOC_HEADER_EMPLOYEE') + ': ' +  this.data.attendedByName;
