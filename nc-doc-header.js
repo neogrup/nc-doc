@@ -56,7 +56,7 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
               <div class="order-id">[[data.subTypeExplain]]</div>
           </template>
           <template is="dom-if" if="{{!showTypeOnHeader}}">
-            <div class="order-id">#[[data.order]]</div>           
+            <div class="order-id"># [[orderID]]</div>           
           </template>  
 
           <template is="dom-if" if="{{previewMode}}">
@@ -79,6 +79,7 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         value: {},
         observer: '_dataChanged'
       },
+      orderID: String,
       previewMode: Boolean,
       customDesc: String
     }
@@ -118,10 +119,21 @@ class NcDocHeader extends mixinBehaviors([AppLocalizeBehavior], MixinDoc(Polymer
         }
       }
     }
+
+    this.orderID = this.data.order;
+    if (this.data.properties){
+      let OrderID = this.data.properties.find(property => property.name === "IDOrder");
+      if (OrderID) {
+        if (OrderID.value != "") {
+          this.orderID = OrderID.value;
+        }
+      }
+    }
   }
 
   _toggleTicketLinesScreen(){
       this.dispatchEvent(new CustomEvent('toggleTicketLinesScreen', { bubbles: true, composed: true }));
   }
+
 }
 window.customElements.define('nc-doc-header', NcDocHeader);

@@ -1,0 +1,253 @@
+{
+    "apiVersion": "1",
+    "systemTime": "2019-03-22T10:18:42.7809457+01:00",
+    "data": {
+        "version": "0.3",
+        "type": "ticket",
+        "subType": "CON",
+        "subTypeExplain": "Venta",
+        "order": "600001",
+        "date": "20250402",
+        "shopCode": "R002",
+        "shopName": "Restaurante ' Granada DEV",
+        "status": "opened",
+        "statusExplain": "opened",
+        "sysData": {
+            "created": "2025-04-02T09:02:30Z",
+            "createdBy": "78968761D",
+            "createdByName": "Alejando Cintas Sánchez",
+            "edited": "2025-04-02T09:36:30.1670785+02:00",
+            "editedBy": "ACS",
+            "editedByName": "Alejando Cintas Sánchez",
+            "editing": "2025-04-02T09:36:30.1670785+02:00",
+            "editingBy": "ACS",
+            "sent": "2025-04-02T09:28:28Z"
+        },
+        "buyerParty": {
+            "code": "00000",
+            "name": "Contado",
+            "postalAddress": {
+                "detail": "",
+                "city": "",
+                "postalCode": "",
+                "state": "",
+                "country": "",
+                "countryiso30661": ""
+            },
+            "loyalty": {},
+            "taxIdentification": {},
+            "contact": {}
+        },
+        "fiscal": {
+            "currency": {
+                "code": "EUR",
+                "symbol": "€",
+                "decimals": 0,
+                "decimalsUnitPrice": 0,
+                "decimalsLineAmount": 0
+            },
+            "quantity": {
+                "decimals": 0
+            },
+            "priceWithTaxes": "S",
+            "taxes": [
+                {
+                    "id": "IVA",
+                    "ruleId": "IVA8",
+                    "rate": 8,
+                    "baseAmount": 2.5,
+                    "taxAmount": 0.2,
+                    "totalAmount": 2.7
+                },
+                {
+                    "id": "IVA",
+                    "ruleId": "IVA21",
+                    "rate": 21,
+                    "baseAmount": 8.26,
+                    "taxAmount": 1.73,
+                    "totalAmount": 9.99
+                }
+            ],
+            "totals": {
+                "grossAmount": 10.76,
+                "netAmount": 10.76,
+                "totalAmount": 12.69,
+                "pendingAmount": 12.69,
+                "subTotal": 12.69
+            },
+            "drawer": "R00401",
+            "drawerName": "Cajón 01",
+            "closedTime": "0001-01-01T00:00:00Z",
+            "delivered": "N",
+            "deliveredTime": "0001-01-01T00:00:00Z",
+            "refundDoc": "0",
+            "refundType": "0",
+            "serviceDate": "0001-01-01T00:00:00Z",
+            "urlNeo": "https://cloudtest.neogrup.com/getdoc/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzIjoiTkdSUFYwMDFSMDAyIiwiZCI6IjIwMjUwNDAyIiwibyI6IjYwMDAwMSJ9.X-I9PqNdzcdjYAec9G38NTwVUD1j0VUpVScC1BovpFA"
+        },
+        "lines": [
+            {
+                "id": 1,
+                "product": {
+                    "id": "R00094",
+                    "name": "Patatas bravas",
+                    "price": 2.7,
+                    "basePrice": 2.5,
+                    "tariffPrice": 2.7,
+                    "barcode": {}
+                },
+                "qty": 1,
+                "unitOfMeasure": "UD",
+                "format": {
+                    "factor": 1,
+                    "qty": 1
+                },
+                "grossQty": 1,
+                "grossAmount": 2.5,
+                "netAmount": 2.5,
+                "totalAmount": 2.7,
+                "taxRuleId": "IVA8",
+                "taxes": [
+                    {
+                        "id": "IVA",
+                        "ruleId": "IVA8",
+                        "rate": 8,
+                        "baseAmount": 2.5,
+                        "taxAmount": 0.2,
+                        "totalAmount": 2.7
+                    }
+                ],
+                "comments": {},
+                "status": "active",
+                "businessSource": "B",
+                "startTime": "2025-04-02T09:25:17.133Z",
+                "endTime": "0001-01-01T00:00:00Z",
+                "group": "user,time",
+                "kitchen": {
+                    "producedQty": 1,
+                    "producedTime": "2025-04-02T09:27:27Z",
+                    "status": "FI",
+                    "deliveryOrder": 2,
+                    "deliveryName": "Entrantes",
+                    "noteGroup": ""
+                },
+                "sysData": {
+                    "created": "0001-01-01T00:00:00Z",
+                    "edited": "2025-04-02T09:25:17.137Z",
+                    "editing": "0001-01-01T00:00:00Z",
+                    "sent": "0001-01-01T00:00:00Z"
+                },
+                "affectPrice": "S",
+                "agent": "78968761D",
+                "agentName": "ACS"
+            },
+            {
+                "id": 2,
+                "product": {
+                    "id": "R00001",
+                    "name": "Coca Cola lata2",
+                    "price": 9.99,
+                    "basePrice": 8.256198347107437,
+                    "tariffPrice": 9.99,
+                    "barcode": {}
+                },
+                "qty": 1,
+                "unitOfMeasure": "UD",
+                "format": {
+                    "factor": 1,
+                    "qty": 1
+                },
+                "grossQty": 1,
+                "grossAmount": 8.26,
+                "netAmount": 8.2562,
+                "totalAmount": 9.99,
+                "taxRuleId": "IVA21",
+                "taxes": [
+                    {
+                        "id": "IVA",
+                        "ruleId": "IVA21",
+                        "rate": 21,
+                        "baseAmount": 8.2562,
+                        "taxAmount": 1.7338,
+                        "totalAmount": 9.99
+                    }
+                ],
+                "comments": {},
+                "businessSource": "B",
+                "rule": "EPL",
+                "startTime": "2025-04-02T09:36:30.1658507+02:00",
+                "endTime": "0001-01-01T00:00:00Z",
+                "group": "user,time",
+                "kitchen": {
+                    "producedTime": "0001-01-01T00:00:00Z",
+                    "status": "PE",
+                    "deliveryOrder": 1,
+                    "deliveryName": "Bebidas",
+                    "noteGroup": "0000000003"
+                },
+                "sysData": {
+                    "created": "2025-04-02T09:36:30.1658507+02:00",
+                    "createdBy": "ACS",
+                    "edited": "2025-04-02T09:36:30.1658507+02:00",
+                    "editedBy": "ACS",
+                    "editing": "0001-01-01T00:00:00Z",
+                    "sent": "0001-01-01T00:00:00Z"
+                },
+                "affectPrice": "S",
+                "agent": "78968761D",
+                "agentName": "ACS"
+            }
+        ],
+        "operator": "78968761D",
+        "attendedBy": "78968761D",
+        "attendedByName": "ACS",
+        "location": {
+            "zone": "R002BAR",
+            "zoneName": "Barra",
+            "spot": "09",
+            "spotName": "Mesa 9"
+        },
+        "tariff": {
+            "code": "R001",
+            "name": "Venta Rest. Barra",
+            "date": "20250402"
+        },
+        "owner": "Z01",
+        "lock": {
+            "owner": "Z01",
+            "status": "CU",
+            "time": "2025-04-02T09:28:33.397Z"
+        },
+        "lastModifiedLine": 2,
+        "stats": {
+            "printProformaCount": 0,
+            "printInvoiceCount": 0,
+            "deliveredProducts": 2,
+            "soldProducts": 2,
+            "producedProductsPF": 0,
+            "noProforma": "N"
+        },
+        "properties": [
+            {
+                "name": "IDOrder",
+                "value": "QMATIC5"
+            },
+            {
+                "name": "queueID",
+                "value": "5"
+            }
+        ],
+        "production": {
+            "printed": "N",
+            "pager": {
+                "id": "",
+                "assignTime": "0001-01-01T00:00:00Z"
+            }
+        },
+        "shopInfo": {
+            "shop": "NGRPV001R002",
+            "shopCode": "R002"
+        }
+    },
+    "error": null
+}
