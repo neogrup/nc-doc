@@ -30,5 +30,13 @@
     "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Pas de changement",
     "DOC_HEADER_EMPLOYEE": "Employé",
     "DOC_LINES_NOT_LINES": "Aucun produit n'a été ajouté"
+  },
+  "eu-es":{
+    "DOC_FOOTER_CHANGED_AMOUNT": "Aldaketa",
+    "DOC_FOOTER_DELIVERED_AMOUNT": "Eman",
+    "DOC_FOOTER_TOTAL_AMOUNT": "Zenbatekoa",
+    "DOC_FOOTER_WITHOUT_CHANGED_AMOUNT": "Aldaketarik gabe",
+    "DOC_HEADER_EMPLOYEE": "Langilea",
+    "DOC_LINES_NOT_LINES": "Produkturik ez da gehitu"
   }
 }
